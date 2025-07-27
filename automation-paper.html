@@ -369,12 +369,17 @@
 
                 <div class="chart-container">
                     <p><strong>Workflow Impact Visualization</strong></p>
-                    <img src="https://48211015.fs1.hubspotusercontent-na1.net/hubfs/48211015/WORKFLOW%20IMPACT.png" alt="Workflow Impact Chart" />
+                    <div id="workflow_impact_chart" style="width: 100%; height: 400px;"></div>
                 </div>
 
                 <div class="chart-container">
                     <p><strong>Workflow Efficiency and Adoption Analysis</strong></p>
-                    <img src="https://48211015.fs1.hubspotusercontent-na1.net/hubfs/48211015/workflow%20and%20adoption-1.png" alt="Workflow and Adoption Analysis" />
+                    <div id="efficiency_adoption_chart" style="width: 100%; height: 400px;"></div>
+                </div>
+
+                <div class="chart-container">
+                    <p><strong>Automation Tools Comparison</strong></p>
+                    <div id="tools_comparison_chart" style="width: 100%; height: 400px;"></div>
                 </div>
 
                 <p>The industry case study data show how much no-code automation can improve workflow efficiency. The table and chart above show the difference between the time it took to do tasks manually and the time saved through automation.</p>
@@ -409,5 +414,228 @@
             <p><strong>Zapier. (2021). <em>How Automation Tools Saved Over 75% of Manual Process Time</em>. Retrieved from https://zapier.com/case-studies</strong></p>
         </section>
     </div>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {packages: ['corechart', 'bar', 'line']});
+        google.charts.setOnLoadCallback(drawAllCharts);
+
+        function drawAllCharts() {
+            drawWorkflowImpactChart();
+            drawEfficiencyAdoptionChart();
+            drawToolsComparisonChart();
+        }
+
+        function drawWorkflowImpactChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Workflow', 'Manual Time (hours)', 'Automated Time (hours)', 'Time Saved (hours)'],
+                ['Database Updates', 3.0, 0.75, 2.25],
+                ['Team Notifications', 2.0, 0.5, 1.5],
+                ['Production Scheduling', 2.5, 0.67, 1.83],
+                ['Document Processing', 1.5, 0.25, 1.25],
+                ['Inventory Management', 3.5, 1.0, 2.5]
+            ]);
+
+            var options = {
+                title: 'Workflow Impact: Manual vs Automated Time Comparison',
+                titleTextStyle: {
+                    fontSize: 16,
+                    bold: true,
+                    color: '#2c3e50'
+                },
+                chartArea: {width: '70%', height: '70%'},
+                colors: ['#ff6b6b', '#4ecdc4', '#45b7d1'],
+                hAxis: {
+                    title: 'Time (Hours)',
+                    minValue: 0,
+                    textStyle: {fontSize: 12}
+                },
+                vAxis: {
+                    title: 'Workflow Types',
+                    textStyle: {fontSize: 12}
+                },
+                legend: {
+                    position: 'top',
+                    maxLines: 3,
+                    textStyle: {fontSize: 12}
+                },
+                backgroundColor: 'transparent',
+                animation: {
+                    startup: true,
+                    duration: 1000,
+                    easing: 'out'
+                }
+            };
+
+            var chart = new google.visualization.BarChart(document.getElementById('workflow_impact_chart'));
+            chart.draw(data, options);
+        }
+
+        function drawEfficiencyAdoptionChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Month', 'Efficiency Gain (%)', 'Adoption Rate (%)', 'ROI ($000)'],
+                ['Month 1', 15, 25, 2],
+                ['Month 2', 25, 40, 5],
+                ['Month 3', 35, 55, 12],
+                ['Month 4', 45, 70, 18],
+                ['Month 5', 55, 80, 25],
+                ['Month 6', 65, 90, 32],
+                ['Month 7', 70, 95, 38],
+                ['Month 8', 75, 98, 42]
+            ]);
+
+            var options = {
+                title: 'Workflow Efficiency and Adoption Analysis Over Time',
+                titleTextStyle: {
+                    fontSize: 16,
+                    bold: true,
+                    color: '#2c3e50'
+                },
+                curveType: 'function',
+                legend: {
+                    position: 'bottom',
+                    textStyle: {fontSize: 12}
+                },
+                hAxis: {
+                    title: 'Implementation Timeline',
+                    textStyle: {fontSize: 12}
+                },
+                vAxes: {
+                    0: {
+                        title: 'Percentage (%)',
+                        textStyle: {color: '#667eea', fontSize: 12}
+                    },
+                    1: {
+                        title: 'ROI (Thousands $)',
+                        textStyle: {color: '#ff6b6b', fontSize: 12}
+                    }
+                },
+                series: {
+                    0: {targetAxisIndex: 0, color: '#667eea', lineWidth: 3},
+                    1: {targetAxisIndex: 0, color: '#4ecdc4', lineWidth: 3},
+                    2: {targetAxisIndex: 1, color: '#ff6b6b', lineWidth: 3}
+                },
+                backgroundColor: 'transparent',
+                pointSize: 6,
+                animation: {
+                    startup: true,
+                    duration: 1000,
+                    easing: 'out'
+                }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('efficiency_adoption_chart'));
+            chart.draw(data, options);
+        }
+
+        function drawToolsComparisonChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Tool', 'Setup Time (hours)', 'Monthly Cost ($)', 'Efficiency Rating', 'User Satisfaction'],
+                ['Zapier', 2, 50, 85, 4.2],
+                ['Make.com', 4, 30, 92, 4.5],
+                ['Microsoft Power Automate', 6, 40, 88, 4.0],
+                ['n8n', 8, 20, 90, 4.3],
+                ['Integromat (legacy)', 5, 35, 82, 3.8]
+            ]);
+
+            var options = {
+                title: 'No-Code Automation Tools Comparison',
+                titleTextStyle: {
+                    fontSize: 16,
+                    bold: true,
+                    color: '#2c3e50'
+                },
+                bubble: {
+                    textStyle: {
+                        fontSize: 11,
+                        color: 'white',
+                        bold: true
+                    }
+                },
+                hAxis: {
+                    title: 'Setup Time (hours)',
+                    minValue: 0,
+                    maxValue: 10,
+                    textStyle: {fontSize: 12}
+                },
+                vAxis: {
+                    title: 'Monthly Cost ($)',
+                    minValue: 0,
+                    maxValue: 60,
+                    textStyle: {fontSize: 12}
+                },
+                colorAxis: {
+                    colors: ['#ff6b6b', '#feca57', '#48ca48']
+                },
+                backgroundColor: 'transparent',
+                legend: {
+                    position: 'none'
+                },
+                animation: {
+                    startup: true,
+                    duration: 1000,
+                    easing: 'out'
+                }
+            };
+
+            var chart = new google.visualization.BubbleChart(document.getElementById('tools_comparison_chart'));
+            chart.draw(data, options);
+        }
+
+        // Interactive features
+        let currentView = 'impact';
+        
+        function switchView(viewType) {
+            currentView = viewType;
+            
+            // Hide all charts
+            document.getElementById('workflow_impact_chart').style.display = 'none';
+            document.getElementById('efficiency_adoption_chart').style.display = 'none';
+            document.getElementById('tools_comparison_chart').style.display = 'none';
+            
+            // Show selected chart
+            if (viewType === 'impact') {
+                document.getElementById('workflow_impact_chart').style.display = 'block';
+                drawWorkflowImpactChart();
+            } else if (viewType === 'efficiency') {
+                document.getElementById('efficiency_adoption_chart').style.display = 'block';
+                drawEfficiencyAdoptionChart();
+            } else if (viewType === 'tools') {
+                document.getElementById('tools_comparison_chart').style.display = 'block';
+                drawToolsComparisonChart();
+            }
+        }
+
+        // Add interactive controls to the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add navigation controls
+            const controlsHTML = `
+                <div style="text-align: center; margin: 2rem 0; background: #f8fafc; padding: 1rem; border-radius: 15px;">
+                    <h4 style="margin-bottom: 1rem; color: #2c3e50;">Interactive Chart Controls</h4>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button onclick="switchView('impact')" style="padding: 8px 16px; border: none; border-radius: 20px; background: #667eea; color: white; cursor: pointer;">📊 Workflow Impact</button>
+                        <button onclick="switchView('efficiency')" style="padding: 8px 16px; border: none; border-radius: 20px; background: #4ecdc4; color: white; cursor: pointer;">📈 Efficiency & Adoption</button>
+                        <button onclick="switchView('tools')" style="padding: 8px 16px; border: none; border-radius: 20px; background: #ff6b6b; color: white; cursor: pointer;">🛠️ Tools Comparison</button>
+                        <button onclick="window.open('implementation-guide.html', '_blank')" style="padding: 8px 16px; border: none; border-radius: 20px; background: #764ba2; color: white; cursor: pointer;">🚀 Implementation Guide</button>
+                    </div>
+                </div>
+            `;
+            
+            // Insert controls before the first chart
+            const firstChart = document.querySelector('.chart-container');
+            if (firstChart) {
+                firstChart.insertAdjacentHTML('beforebegin', controlsHTML);
+            }
+        });
+
+        // Resize charts when window resizes
+        window.addEventListener('resize', function() {
+            setTimeout(function() {
+                if (currentView === 'impact') drawWorkflowImpactChart();
+                else if (currentView === 'efficiency') drawEfficiencyAdoptionChart();
+                else if (currentView === 'tools') drawToolsComparisonChart();
+            }, 250);
+        });
+    </script>
 </body>
 </html>
