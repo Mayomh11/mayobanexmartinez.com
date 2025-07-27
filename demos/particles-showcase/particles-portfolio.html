@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particles.js Portfolio Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .content {
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+            background-size: 300% 300%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0.25rem;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.2rem; }
+            .controls { 
+                position: relative;
+                margin-top: 2rem;
+                right: auto;
+                top: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    
+    <div class="container">
+        <div class="content">
+            <h1>Particles.js Showcase</h1>
+            <p class="subtitle">Interactive particle system with real-time controls</p>
+            
+            <div class="controls">
+                <div class="control-group">
+                    <label>Particle Count: <span id="count-value">80</span></label>
+                    <input type="range" id="particle-count" min="20" max="200" value="80">
+                </div>
+                
+                <div class="control-group">
+                    <label>Speed: <span id="speed-value">3</span></label>
+                    <input type="range" id="particle-speed" min="1" max="10" value="3">
+                </div>
+                
+                <div class="control-group">
+                    <label>Connection Distance: <span id="distance-value">150</span></label>
+                    <input type="range" id="connect-distance" min="50" max="300" value="150">
+                </div>
+                
+                <button onclick="changeTheme('professional')">Professional</button>
+                <button onclick="changeTheme('creative')">Creative</button>
+                <button onclick="changeTheme('minimal')">Minimal</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentConfig = {
+            particles: {
+                number: { value: 80 },
+                color: { value: "#667eea" },
+                shape: {
+                    type: "circle",
+                    stroke: { width: 0, color: "#000000" }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    anim: { enable: false }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: { enable: false }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#667eea",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 3,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "attract" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    attract: { distance: 200, duration: 0.4 },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        };
+
+        // Initialize particles
+        particlesJS('particles-js', currentConfig);
+
+        // Control handlers
+        document.getElementById('particle-count').addEventListener('input', function(e) {
+            const value = e.target.value;
+            document.getElementById('count-value').textContent = value;
+            updateParticles({ 'particles.number.value': parseInt(value) });
+        });
+
+        document.getElementById('particle-speed').addEventListener('input', function(e) {
+            const value = e.target.value;
+            document.getElementById('speed-value').textContent = value;
+            updateParticles({ 'particles.move.speed': parseInt(value) });
+        });
+
+        document.getElementById('connect-distance').addEventListener('input', function(e) {
+            const value = e.target.value;
+            document.getElementById('distance-value').textContent = value;
+            updateParticles({ 'particles.line_linked.distance': parseInt(value) });
+        });
+
+        function updateParticles(changes) {
+            // Update current config
+            Object.keys(changes).forEach(key => {
+                const keys = key.split('.');
+                let obj = currentConfig;
+                for (let i = 0; i < keys.length - 1; i++) {
+                    obj = obj[keys[i]];
+                }
+                obj[keys[keys.length - 1]] = changes[key];
+            });
+            
+            // Reinitialize particles
+            particlesJS('particles-js', currentConfig);
+        }
+
+        function changeTheme(theme) {
+            let themeConfig = { ...currentConfig };
+            
+            switch(theme) {
+                case 'professional':
+                    themeConfig.particles.color.value = "#667eea";
+                    themeConfig.particles.line_linked.color = "#667eea";
+                    themeConfig.particles.number.value = 80;
+                    themeConfig.particles.move.speed = 2;
+                    break;
+                    
+                case 'creative':
+                    themeConfig.particles.color.value = ["#ff6b6b", "#4ecdc4", "#45b7d1", "#f093fb"];
+                    themeConfig.particles.line_linked.color = "#ff6b6b";
+                    themeConfig.particles.number.value = 120;
+                    themeConfig.particles.move.speed = 4;
+                    break;
+                    
+                case 'minimal':
+                    themeConfig.particles.color.value = "#ffffff";
+                    themeConfig.particles.line_linked.color = "#ffffff";
+                    themeConfig.particles.number.value = 40;
+                    themeConfig.particles.move.speed = 1;
+                    themeConfig.particles.opacity.value = 0.3;
+                    break;
+            }
+            
+            currentConfig = themeConfig;
+            particlesJS('particles-js', currentConfig);
+        }
+
+        // Performance monitoring
+        let frameCount = 0;
+        let lastTime = performance.now();
+        
+        function monitorPerformance() {
+            frameCount++;
+            const currentTime = performance.now();
+            
+            if (frameCount >= 60) {
+                const fps = 60000 / (currentTime - lastTime);
+                
+                // Adaptive quality based on performance
+                if (fps < 30 && currentConfig.particles.number.value > 50) {
+                    currentConfig.particles.number.value = Math.max(30, currentConfig.particles.number.value - 10);
+                    particlesJS('particles-js', currentConfig);
+                }
+                
+                frameCount = 0;
+                lastTime = currentTime;
+            }
+            
+            requestAnimationFrame(monitorPerformance);
+        }
+        
+        monitorPerformance();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mayo Martinez - Research & Development Portfolio</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.birds.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.dots.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Animated Background */
+        #vanta-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            background: linear-gradient(135deg, rgba(102,126,234,0.8) 0%, rgba(118,75,162,0.8) 100%);
+        }
+
+        .hero-content {
+            z-index: 10;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            font-weight: 300;
+        }
+
+        .hero .description {
+            font-size: 1.2rem;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: rgba(255,255,255,0.95);
+            color: #667eea;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.8);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Main Content */
+        main {
+            background: white;
+            position: relative;
+            z-index: 1;
+            border-radius: 30px 30px 0 0;
+            overflow: hidden;
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.1);
+            margin-top: -30px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #718096;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            line-height: 1.6;
+        }
+
+        /* Research Section */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .research-paper {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 3rem;
+            border-radius: 25px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-paper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .research-paper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 0;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            transition: height 0.4s ease;
+        }
+
+        .research-paper:hover::after {
+            height: 100%;
+        }
+
+        .research-paper:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .paper-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .paper-description {
+            color: #4a5568;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .paper-tags {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        }
+
+        .paper-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-small {
+            padding: 10px 25px;
+            font-size: 0.9rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline {
+            border: 2px solid #667eea;
+            color: #667eea;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.3);
+        }
+
+        /* Technical Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1));
+            transition: width 0.4s ease;
+            z-index: 1;
+        }
+
+        .project-card:hover::before {
+            width: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .project-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-type {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .project-content {
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-description {
+            color: #4a5568;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            background: #f7fafc;
+            color: #4a5568;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .skill-category {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 25px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(102,126,234,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .skill-category:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .skill-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            box-shadow: 0 10px 30px rgba(102,126,234,0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .skill-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+            position: relative;
+            z-index: 2;
+        }
+
+        .skill-list {
+            color: #4a5568;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="90" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .contact .section-title,
+        .contact .section-subtitle {
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .contact-link:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Scroll Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Accessibility and Performance Optimizations */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            #vanta-bg {
+                background: linear-gradient(135deg, rgba(102,126,234,0.8) 0%, rgba(118,75,162,0.8) 100%) !important;
+            }
+            
+            .scroll-animate {
+                opacity: 1 !important;
+                transform: translateY(0) !important;
+            }
+        }
+        
+        /* Battery optimization for mobile devices */
+        @media (max-width: 768px) and (max-resolution: 150dpi) {
+            #vanta-bg {
+                transform: scale(0.8);
+                transform-origin: center;
+            }
+        }
+        
+        /* High refresh rate optimization */
+        @media (min-refresh-rate: 120hz) {
+            .btn, .project-card, .research-paper, .skill-category {
+                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            }
+        }
+        
+        /* Alien-tech fallback styling */
+        .alien-fallback {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .alien-fallback::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(150, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(0, 150, 255, 0.05) 0%, transparent 70%);
+            animation: alien-pulse 8s ease-in-out infinite;
+        }
+        
+        .alien-fallback::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(0deg, transparent 24%, rgba(0, 255, 150, 0.03) 25%, rgba(0, 255, 150, 0.03) 26%, transparent 27%, transparent 74%, rgba(150, 0, 255, 0.03) 75%, rgba(150, 0, 255, 0.03) 76%, transparent 77%),
+                linear-gradient(90deg, transparent 24%, rgba(0, 150, 255, 0.03) 25%, rgba(0, 150, 255, 0.03) 26%, transparent 27%, transparent 74%, rgba(255, 0, 128, 0.03) 75%, rgba(255, 0, 128, 0.03) 76%, transparent 77%);
+            background-size: 50px 50px;
+            animation: alien-grid 20s linear infinite;
+        }
+        
+        @keyframes alien-pulse {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.8;
+            }
+            33% { 
+                transform: scale(1.05) rotate(0.5deg);
+                opacity: 1;
+            }
+            66% { 
+                transform: scale(0.95) rotate(-0.5deg);
+                opacity: 0.9;
+            }
+        }
+        
+        @keyframes alien-grid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        /* Enhanced hero section for alien theme */
+        .hero {
+            background: none;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 100;
+        }
+        
+        .hero h1 {
+            text-shadow: 
+                0 0 10px rgba(0, 255, 150, 0.5),
+                0 0 20px rgba(0, 255, 150, 0.3),
+                0 0 30px rgba(0, 255, 150, 0.1);
+        }
+        
+        /* Futuristic button effects */
+        .btn::before {
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 255, 150, 0.3), 
+                rgba(150, 0, 255, 0.3), 
+                transparent);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, 
+                rgba(0, 255, 150, 0.2) 0%, 
+                rgba(150, 0, 255, 0.2) 100%);
+            border: 1px solid rgba(0, 255, 150, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 150, 0.2),
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 
+                0 0 30px rgba(0, 255, 150, 0.4),
+                0 0 50px rgba(150, 0, 255, 0.2),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-secondary {
+            border: 2px solid rgba(0, 255, 150, 0.6);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 150, 0.1),
+                inset 0 1px 1px rgba(0, 255, 150, 0.1);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 255, 150, 0.1);
+            box-shadow: 
+                0 0 30px rgba(0, 255, 150, 0.3),
+                inset 0 1px 1px rgba(0, 255, 150, 0.2);
+        }
+        
+        /* Alien-tech effect controls */
+        .alien-controls {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1.2s forwards;
+        }
+        
+        .effect-btn {
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 255, 150, 0.3);
+            border-radius: 20px;
+            color: rgba(0, 255, 150, 0.8);
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .effect-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 150, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .effect-btn:hover::before {
+            left: 100%;
+        }
+        
+        .effect-btn:hover {
+            background: rgba(0, 255, 150, 0.1);
+            border-color: rgba(0, 255, 150, 0.6);
+            color: rgba(0, 255, 150, 1);
+            box-shadow: 
+                0 0 15px rgba(0, 255, 150, 0.3),
+                inset 0 1px 1px rgba(0, 255, 150, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .effect-btn.active {
+            background: rgba(0, 255, 150, 0.2);
+            border-color: rgba(0, 255, 150, 0.8);
+            color: rgba(255, 255, 255, 0.9);
+            box-shadow: 
+                0 0 20px rgba(0, 255, 150, 0.4),
+                inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero .description {
+                font-size: 1rem;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            /* Mobile-specific optimizations */
+            #vanta-bg {
+                will-change: auto;
+            }
+        }
+        
+        /* Performance hints for modern browsers */
+        #vanta-bg {
+            contain: layout style paint;
+            will-change: transform;
+        }
+        
+        .hero-content {
+            will-change: transform;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div id="vanta-bg"></div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">Mayo Martinez</div>
+            <ul class="nav-links">
+                <li><a href="#research">Research</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#automation">Automation</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Where Research Meets Reality</h1>
+            <p class="subtitle">Product Development Lead | Operations Specialist | Research Analyst</p>
+            <p class="description">
+                I bridge the gap between cutting-edge research and practical implementation. From analyzing AI's impact on emerging economies to automating luxury fashion operations, I transform insights into efficiency and innovation into results.
+            </p>
+            <div class="cta-buttons">
+                <a href="#research" class="btn btn-primary">View Research</a>
+                <a href="#projects" class="btn btn-secondary">See Projects</a>
+            </div>
+            
+            <!-- Alien-tech Effect Controls -->
+            <div class="alien-controls">
+                <button onclick="switchEffect(0)" class="effect-btn" data-effect="BIRDS">Swarm Intel</button>
+                <button onclick="switchEffect(1)" class="effect-btn" data-effect="WAVES">Alien Waves</button>
+                <button onclick="switchEffect(2)" class="effect-btn" data-effect="NET">Data Mesh</button>
+                <button onclick="switchEffect(3)" class="effect-btn" data-effect="DOTS">Particle Matrix</button>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section id="research" class="container scroll-animate">
+            <h2 class="section-title">Research & Publications</h2>
+            <p class="section-subtitle">
+                Deep-dive analysis combining academic rigor with real-world implementation experience
+            </p>
+            
+            <div class="research-grid">
+                <div class="research-paper">
+                    <h3 class="paper-title">The Impact of AI on Job Markets in Emerging Economies</h3>
+                    <p class="paper-description">
+                        A comprehensive analysis examining how artificial intelligence adoption affects employment patterns, wage structures, and economic development in emerging markets. This research combines quantitative data analysis with case studies from multiple countries to provide actionable insights for policymakers and business leaders.
+                    </p>
+                    <div class="paper-tags">
+                        <span class="tag">AI & Economics</span>
+                        <span class="tag">Labor Markets</span>
+                        <span class="tag">Data Analysis</span>
+                        <span class="tag">Policy Research</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="#" class="btn-small btn-outline">Read Paper</a>
+                        <a href="#" class="btn-small btn-outline">View Data</a>
+                    </div>
+                </div>
+
+                <div class="research-paper">
+                    <h3 class="paper-title">The Impact of No-Code Automation</h3>
+                    <p class="paper-description">
+                        An in-depth study on how no-code and low-code platforms are democratizing automation across industries. Drawing from hands-on implementation experience, this research explores efficiency gains, adoption barriers, and future implications for business operations and workforce development.
+                    </p>
+                    <div class="paper-tags">
+                        <span class="tag">Automation</span>
+                        <span class="tag">Digital Transformation</span>
+                        <span class="tag">Business Operations</span>
+                        <span class="tag">Case Studies</span>
+                    </div>
+                    <div class="paper-actions">
+                        <a href="#" class="btn-small btn-outline">Read Paper</a>
+                        <a href="#" class="btn-small btn-outline">Implementation Guide</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="container scroll-animate">
+            <h2 class="section-title">Technical Projects</h2>
+            <p class="section-subtitle">
+                Code-based solutions demonstrating analytical thinking and technical implementation skills
+            </p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Financial Data Analysis (PyBank)</h3>
+                        <p class="project-type">Data Science • Python</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Comprehensive financial data analysis tool for processing and visualizing banking datasets. Implements statistical analysis, trend identification, and automated reporting capabilities.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">Matplotlib</span>
+                            <span class="tech-tag">Statistical Analysis</span>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://github.com/Mayomh11/PyBank" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Weather Data Analytics (WeatherPy)</h3>
+                        <p class="project-type">API Integration • Data Visualization</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Advanced weather data analysis platform utilizing API integrations and statistical modeling to identify climate patterns and correlations across global datasets.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">APIs</span>
+                            <span class="tech-tag">Jupyter</span>
+                            <span class="tech-tag">Data Visualization</span>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://github.com/Mayomh11/WeatherPy" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Database Investigation</h3>
+                        <p class="project-type">SQL • Database Design</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Complex database analysis project involving data modeling, query optimization, and mystery-solving through systematic data investigation techniques.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">PL/pgSQL</span>
+                            <span class="tech-tag">Data Modeling</span>
+                            <span class="tech-tag">Query Optimization</span>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://github.com/Mayomh11/Employee-Database-A-Mystery-in-Two-Parts" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="automation" class="container scroll-animate">
+            <h2 class="section-title">Automation & Systems</h2>
+            <p class="section-subtitle">
+                Real-world implementations that delivered measurable business impact
+            </p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Operations Automation Suite</h3>
+                        <p class="project-type">Process Engineering • 40% Efficiency Gain</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Comprehensive automation system for luxury fashion operations including onboarding workflows, timesheet processing, and purchase order management. Reduced administrative overhead by 40% while improving accuracy and compliance.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Make.com</span>
+                            <span class="tech-tag">Monday.com</span>
+                            <span class="tech-tag">API Integration</span>
+                            <span class="tech-tag">Workflow Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Supply Chain Integration</h3>
+                        <p class="project-type">Multi-Platform Automation</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Automated vendor communication and inventory tracking system spanning multiple time zones and platforms. Streamlined coordination for high-end fashion production workflows.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">n8n</span>
+                            <span class="tech-tag">Airtable</span>
+                            <span class="tech-tag">Slack Integration</span>
+                            <span class="tech-tag">Multi-timezone</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Data Pipeline Automation</h3>
+                        <p class="project-type">CRM/ERP Integration</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Automated data synchronization and reporting system for client, supplier, and project management. Real-time dashboards and alerts for production timeline management.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Database Integration</span>
+                            <span class="tech-tag">Real-time Sync</span>
+                            <span class="tech-tag">Automated Reporting</span>
+                            <span class="tech-tag">Dashboard Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="container scroll-animate">
+            <h2 class="section-title">Core Capabilities</h2>
+            <p class="section-subtitle">
+                A unique combination of research depth, technical skills, and operational excellence
+            </p>
+            
+            <div class="skills-container">
+                <div class="skill-category">
+                    <div class="skill-icon">📊</div>
+                    <h3 class="skill-title">Research & Analysis</h3>
+                    <div class="skill-list">
+                        Academic Research • Data Analysis • Statistical Modeling • Economic Analysis • Policy Research • Market Studies • Quantitative Methods
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon">💻</div>
+                    <h3 class="skill-title">Programming & Development</h3>
+                    <div class="skill-list">
+                        Python • R • SQL • C++ • C# • JavaScript • HTML/CSS • API Development • Database Design • Version Control
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon">⚡</div>
+                    <h3 class="skill-title">Automation & Integration</h3>
+                    <div class="skill-list">
+                        Make.com • n8n • Monday.com • Airtable • Zapier • API Integration • Workflow Design • Process Optimization
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-icon">🎯</div>
+                    <h3 class="skill-title">Product & Operations</h3>
+                    <div class="skill-list">
+                        Product Development • Supply Chain • Project Management • Team Leadership • Process Engineering • Quality Control
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container scroll-animate">
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="section-subtitle">
+                    Ready to discuss research collaborations, technical projects, or operational challenges
+                </p>
+                
+                <div class="contact-links">
+                    <a href="mailto:Mayo9711@gmail.com" class="contact-link">
+                        <span>📧</span> Mayo9711@gmail.com
+                    </a>
+                    <a href="https://linkedin.com/in/mayo-martinez-791492160" class="contact-link">
+                        <span>🔗</span> LinkedIn
+                    </a>
+                    <a href="https://github.com/Mayomh11" class="contact-link">
+                        <span>🐙</span> GitHub
+                    </a>
+                    <a href="https://www.m4io.com" class="contact-link">
+                        <span>🌐</span> m4io.com
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Enhanced Vanta.js background with performance optimizations
+        let vantaEffect;
+        let isLowPowerMode = false;
+        let isMobile = window.innerWidth <= 768;
+        
+        // Device and performance detection
+        function detectPerformanceCapabilities() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isOldDevice = /android [1-4]|iphone os [1-9]|ipad os [1-9]|safari [1-9]/.test(userAgent);
+            const isLowMemory = navigator.deviceMemory && navigator.deviceMemory < 4;
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            return {
+                isLowPower: isOldDevice || isLowMemory || prefersReducedMotion,
+                supportWebGL: !!window.WebGLRenderingContext,
+                batteryApi: 'getBattery' in navigator
+            };
+        }
+        
+        // Battery level monitoring
+        async function checkBatteryLevel() {
+            if ('getBattery' in navigator) {
+                try {
+                    const battery = await navigator.getBattery();
+                    return {
+                        level: battery.level,
+                        charging: battery.charging
+                    };
+                } catch (e) {
+                    return { level: 1, charging: true };
+                }
+            }
+            return { level: 1, charging: true };
+        }
+        
+        // Adaptive configuration based on device capabilities
+        function getVantaConfig(capabilities, battery) {
+            const baseConfig = {
+                el: "#vanta-bg",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                color: 0x667eea
+            };
+            
+            // High performance configuration
+            if (!capabilities.isLowPower && battery.level > 0.3) {
+                return {
+                    ...baseConfig,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    shininess: 50.00,
+                    waveHeight: 20.00,
+                    waveSpeed: 0.75,
+                    zoom: 0.85,
+                    forceAnimate: true
+                };
+            }
+            
+            // Medium performance configuration
+            if (!capabilities.isLowPower || (battery.level > 0.2 && battery.charging)) {
+                return {
+                    ...baseConfig,
+                    scale: 0.8,
+                    scaleMobile: 0.6,
+                    shininess: 30.00,
+                    waveHeight: 15.00,
+                    waveSpeed: 0.5,
+                    zoom: 0.9
+                };
+            }
+            
+            // Low performance / battery saver configuration
+            return {
+                ...baseConfig,
+                scale: 0.5,
+                scaleMobile: 0.3,
+                shininess: 20.00,
+                waveHeight: 10.00,
+                waveSpeed: 0.3,
+                zoom: 1.0,
+                mouseControls: false,
+                touchControls: false
+            };
+        }
+        
+        // Available alien-tech background effects
+        const alienEffects = [
+            'BIRDS',   // Swarm intelligence
+            'WAVES',   // Alien waves effect
+            'NET',     // Data mesh visualization
+            'DOTS'     // Particle matrix
+        ];
+        
+        let currentEffectIndex = 0;
+        let isInitializing = false;
+        
+        // Simplified initialization to test one effect
+        function initVanta() {
+            if (isInitializing) {
+                console.log('Already initializing, skipping...');
+                return;
+            }
+            
+            isInitializing = true;
+            console.log('Starting Vanta initialization...');
+            
+            // Check if basic VANTA and THREE are available
+            if (typeof THREE === 'undefined') {
+                console.error('THREE.js not loaded');
+                initAlienFallback();
+                isInitializing = false;
+                return;
+            }
+            
+            if (typeof VANTA === 'undefined') {
+                console.error('VANTA not loaded');
+                initAlienFallback();
+                isInitializing = false;
+                return;
+            }
+            
+            if (typeof VANTA.WAVES === 'undefined') {
+                console.error('VANTA.WAVES not loaded');
+                initAlienFallback();
+                isInitializing = false;
+                return;
+            }
+            
+            if (vantaEffect) {
+                try {
+                    vantaEffect.destroy();
+                } catch (e) {
+                    console.log('Effect destroy error (safe to ignore):', e.message);
+                }
+                vantaEffect = null;
+            }
+            
+            try {
+                const effectType = alienEffects[currentEffectIndex];
+                console.log(`Initializing alien ${effectType} effect...`);
+                
+                const config = getAlienEffectConfig(effectType);
+                
+                if (typeof VANTA[effectType] === 'undefined') {
+                    throw new Error(`${effectType} effect not loaded`);
+                }
+                
+                vantaEffect = VANTA[effectType](config);
+                
+                if (vantaEffect) {
+                    console.log(`✅ Alien ${effectType} effect working!`);
+                    isInitializing = false;
+                    
+                    // Auto-cycle effects every 30 seconds
+                    setTimeout(() => {
+                        currentEffectIndex = (currentEffectIndex + 1) % alienEffects.length;
+                        initVanta();
+                    }, 30000);
+                    
+                    return;
+                } else {
+                    throw new Error(`${effectType} effect failed to create`);
+                }
+                
+            } catch (error) {
+                console.error(`❌ Error initializing ${alienEffects[currentEffectIndex]}:`, error);
+                initAlienFallback();
+                isInitializing = false;
+            }
+        }
+        
+        // Futuristic CSS fallback for alien theme
+        function initAlienFallback() {
+            const bg = document.getElementById('vanta-bg');
+            bg.className = 'alien-fallback';
+            bg.style.background = `
+                radial-gradient(circle at 20% 20%, rgba(0, 255, 150, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(150, 0, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(0, 150, 255, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)
+            `;
+        }
+        
+        // Dynamic script loading for Vanta effects
+        async function loadVantaEffect(effectType) {
+            const effectUrls = {
+                'TOPOLOGY': 'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js',
+                'NET': 'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js',
+                'BIRDS': 'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js',
+                'TRUNK': 'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.trunk.min.js',
+                'DOTS': 'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js'
+            };
+            
+            // Check if effect already exists
+            if (VANTA[effectType]) {
+                return Promise.resolve();
+            }
+            
+            // Check if URL exists for this effect
+            if (!effectUrls[effectType]) {
+                return Promise.reject(new Error(`No URL found for effect: ${effectType}`));
+            }
+            
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = effectUrls[effectType];
+                script.onload = () => {
+                    console.log(`Loaded effect: ${effectType}`);
+                    resolve();
+                };
+                script.onerror = (error) => {
+                    console.error(`Failed to load effect: ${effectType}`, error);
+                    reject(error);
+                };
+                document.head.appendChild(script);
+            });
+        }
+        
+        // Alien-tech configurations for each effect
+        function getAlienConfig(effectType, capabilities, battery) {
+            const baseConfig = {
+                el: "#vanta-bg",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00
+            };
+            
+            const performanceMultiplier = capabilities.isLowPower ? 0.5 : (battery.level > 0.3 ? 1.0 : 0.7);
+            
+            const configs = {
+                TOPOLOGY: {
+                    ...baseConfig,
+                    color: 0x00ff96,
+                    backgroundColor: 0x0a0a0a,
+                    points: Math.floor(20 * performanceMultiplier),
+                    maxDistance: 25,
+                    spacing: 18,
+                    showDots: true
+                },
+                NET: {
+                    ...baseConfig,
+                    color: 0x9600ff,
+                    backgroundColor: 0x0f0f23,
+                    points: Math.floor(15 * performanceMultiplier),
+                    maxDistance: 20,
+                    spacing: 16,
+                    showDots: true
+                },
+                BIRDS: {
+                    ...baseConfig,
+                    color1: 0x00ddff,
+                    color2: 0xff0080,
+                    backgroundColor: 0x0a0a1a,
+                    quantity: Math.floor(3 * performanceMultiplier),
+                    birdSize: 1.2,
+                    wingSpan: 25,
+                    speedLimit: 4,
+                    separation: 20,
+                    alignment: 20,
+                    cohesion: 20
+                },
+                TRUNK: {
+                    ...baseConfig,
+                    color: 0x40e0d0,
+                    backgroundColor: 0x0d1421,
+                    spacing: 0,
+                    chaos: 3
+                },
+                DOTS: {
+                    ...baseConfig,
+                    color: 0xff6b35,
+                    color2: 0x35a7ff,
+                    backgroundColor: 0x0a0a0a,
+                    size: 3,
+                    spacing: 30
+                }
+            };
+            
+            return configs[effectType] || configs.WAVES;
+        }
+        
+        // Simplified alien effect configurations
+        function getAlienEffectConfig(effectType) {
+            const baseConfig = {
+                el: "#vanta-bg",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false
+            };
+            
+            const configs = {
+                WAVES: {
+                    ...baseConfig,
+                    color: 0x00ff96,        // Alien green
+                    shininess: 30,
+                    waveHeight: 15,
+                    waveSpeed: 0.6,
+                    zoom: 0.8
+                },
+                NET: {
+                    ...baseConfig,
+                    color: 0x9600ff,        // Cyber purple
+                    backgroundColor: 0x0f0f23,
+                    points: 10,
+                    maxDistance: 20,
+                    spacing: 15,
+                    showDots: true
+                },
+                BIRDS: {
+                    ...baseConfig,
+                    color1: 0x00ddff,       // Cyan
+                    color2: 0xff0080,       // Magenta
+                    backgroundColor: 0x0a0a1a,
+                    quantity: 3,
+                    birdSize: 1.0,
+                    wingSpan: 20,
+                    speedLimit: 3
+                },
+                DOTS: {
+                    ...baseConfig,
+                    color: 0xff6b35,        // Orange
+                    color2: 0x35a7ff,       // Blue
+                    backgroundColor: 0x0a0a0a,
+                    size: 2,
+                    spacing: 25
+                }
+            };
+            
+            return configs[effectType] || configs.WAVES;
+        }
+        
+        // Manual effect switching function
+        function switchEffect(index) {
+            currentEffectIndex = index;
+            
+            // Update active button
+            document.querySelectorAll('.effect-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+            
+            // Reinitialize with new effect
+            initVanta();
+        }
+        
+        // Test function to verify all effects work (for debugging)
+        window.testAllEffects = async function() {
+            console.log('Testing all alien effects...');
+            
+            for (let i = 0; i < alienEffects.length; i++) {
+                const effectType = alienEffects[i];
+                try {
+                    await loadVantaEffect(effectType);
+                    console.log(`✅ ${effectType} loaded successfully`);
+                } catch (error) {
+                    console.error(`❌ ${effectType} failed:`, error);
+                }
+            }
+            
+            console.log('Effect testing complete. Check browser console for results.');
+        };
+        
+        // Frame rate monitoring and adaptive quality
+        let frameCount = 0;
+        let lastFrameTime = performance.now();
+        
+        function monitorFrameRate() {
+            if (!vantaEffect) return;
+            
+            const currentTime = performance.now();
+            frameCount++;
+            
+            if (frameCount >= 60) { // Check every 60 frames
+                const fps = 60000 / (currentTime - lastFrameTime);
+                
+                if (fps < 30 && !isLowPowerMode) {
+                    // Switch to low power mode
+                    isLowPowerMode = true;
+                    vantaEffect.setOptions({
+                        waveHeight: 10,
+                        waveSpeed: 0.3,
+                        shininess: 20
+                    });
+                }
+                
+                frameCount = 0;
+                lastFrameTime = currentTime;
+            }
+            
+            requestAnimationFrame(monitorFrameRate);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Enhanced scroll effects with Vanta interaction
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const scrollY = window.scrollY;
+            
+            // Header transparency effect
+            if (scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.backdropFilter = 'blur(20px)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+            }
+            
+            // Dynamic Vanta effects based on scroll
+            if (vantaEffect && !isLowPowerMode) {
+                const scrollProgress = Math.min(scrollY / window.innerHeight, 1);
+                const baseWaveHeight = isMobile ? 15 : 20;
+                const baseWaveSpeed = isMobile ? 0.5 : 0.75;
+                
+                // Adjust wave intensity based on scroll position
+                vantaEffect.setOptions({
+                    waveHeight: baseWaveHeight + (scrollProgress * 10),
+                    waveSpeed: baseWaveSpeed + (scrollProgress * 0.3),
+                    shininess: 50 - (scrollProgress * 20)
+                });
+                
+                // Throttle scroll updates
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    if (vantaEffect) {
+                        vantaEffect.setOptions({
+                            waveHeight: baseWaveHeight,
+                            waveSpeed: baseWaveSpeed,
+                            shininess: 50
+                        });
+                    }
+                }, 150);
+            }
+        });
+
+        // Enhanced resize handler with performance throttling
+        let resizeTimeout;
+        function handleResize() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const newIsMobile = window.innerWidth <= 768;
+                
+                // Reinitialize if mobile state changed
+                if (newIsMobile !== isMobile) {
+                    isMobile = newIsMobile;
+                    initVanta();
+                } else if (vantaEffect) {
+                    vantaEffect.resize();
+                }
+            }, 250);
+        }
+        
+        // Visibility API for performance optimization
+        function handleVisibilityChange() {
+            if (document.hidden) {
+                // Pause or reduce animation when tab is not visible
+                if (vantaEffect) {
+                    vantaEffect.setOptions({
+                        waveSpeed: 0.1,
+                        mouseControls: false,
+                        touchControls: false
+                    });
+                }
+            } else {
+                // Resume normal animation when tab becomes visible
+                if (vantaEffect && !isLowPowerMode) {
+                    vantaEffect.setOptions({
+                        waveSpeed: isMobile ? 0.5 : 0.75,
+                        mouseControls: true,
+                        touchControls: true
+                    });
+                }
+            }
+        }
+        
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, checking libraries...');
+            console.log('THREE available:', typeof THREE !== 'undefined');
+            console.log('VANTA available:', typeof VANTA !== 'undefined');
+            
+            // Set initial active button
+            const firstBtn = document.querySelector('.effect-btn');
+            if (firstBtn) {
+                firstBtn.classList.add('active');
+            }
+            
+            // Give libraries time to load, then initialize
+            setTimeout(() => {
+                console.log('After timeout - THREE:', typeof THREE !== 'undefined');
+                console.log('After timeout - VANTA:', typeof VANTA !== 'undefined');
+                console.log('After timeout - VANTA.TOPOLOGY:', typeof VANTA !== 'undefined' && typeof VANTA.TOPOLOGY !== 'undefined');
+                
+                initVanta();
+            }, 500);
+        });
+
+        // Event listeners
+        window.addEventListener('resize', handleResize);
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (vantaEffect) {
+                vantaEffect.destroy();
+            }
+        });
+        
+        // Touch event optimization for mobile
+        if ('ontouchstart' in window) {
+            let touchMoveTimeout;
+            document.addEventListener('touchmove', () => {
+                if (vantaEffect && !isLowPowerMode) {
+                    clearTimeout(touchMoveTimeout);
+                    vantaEffect.setOptions({ touchControls: false });
+                    
+                    touchMoveTimeout = setTimeout(() => {
+                        vantaEffect.setOptions({ touchControls: true });
+                    }, 100);
+                }
+            }, { passive: true });
+        }
+    </script>
+</body>
+</html>
