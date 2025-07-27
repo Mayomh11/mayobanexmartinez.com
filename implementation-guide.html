@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No-Code Automation Implementation Guide - Mayo Martinez</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .back-nav {
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: #764ba2;
+        }
+
+        .guide-header {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .guide-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .guide-subtitle {
+            color: #718096;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .implementation-steps {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .step-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .step-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .step-content {
+            margin-bottom: 2rem;
+        }
+
+        .step-description {
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .interactive-demo {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            border: 2px dashed #667eea;
+        }
+
+        .demo-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .tool-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tool-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .tool-card:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        .tool-card.active {
+            border-color: #764ba2;
+            background: linear-gradient(135deg, #667eea10, #764ba210);
+        }
+
+        .tool-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .workflow-builder {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: #f8fafc;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .workflow-step:hover {
+            background: #e2e8f0;
+        }
+
+        .workflow-arrow {
+            color: #667eea;
+            font-size: 1.5rem;
+        }
+
+        .roi-calculator {
+            background: linear-gradient(135deg, #667eea10, #764ba210);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .input-group {
+            margin: 1rem 0;
+        }
+
+        .input-label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .result-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-label {
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        .checklist {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .checklist-item:hover {
+            background: #f8fafc;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #667eea;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox.checked {
+            background: #667eea;
+            color: white;
+        }
+
+        .progress-tracker {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .progress-bar {
+            background: #e2e8f0;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .guide-header {
+                padding: 2rem;
+            }
+            
+            .guide-title {
+                font-size: 2rem;
+            }
+
+            .step-card {
+                padding: 1.5rem;
+            }
+
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="back-nav">
+            <a href="index.html" class="back-btn">
+                ← Back to Portfolio
+            </a>
+        </nav>
+
+        <header class="guide-header">
+            <h1 class="guide-title">No-Code Automation Implementation Guide</h1>
+            <p class="guide-subtitle">Step-by-step guide to implementing automation solutions in your organization</p>
+            <p>From workflow analysis to full deployment - everything you need to transform your operations</p>
+        </header>
+
+        <div class="implementation-steps">
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h2 class="step-title">Assessment & Planning</h2>
+                </div>
+                <div class="step-content">
+                    <p class="step-description">
+                        Identify workflows that benefit most from automation. Start with repetitive, rule-based tasks that consume significant time.
+                    </p>
+                    
+                    <div class="interactive-demo">
+                        <h3 class="demo-title">🔍 Workflow Assessment Tool</h3>
+                        <div class="checklist">
+                            <div class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <span>Database updates taking more than 2 hours daily</span>
+                            </div>
+                            <div class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <span>Manual team notifications across multiple platforms</span>
+                            </div>
+                            <div class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <span>Production schedule coordination requiring multiple emails</span>
+                            </div>
+                            <div class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <span>Repetitive data entry between systems</span>
+                            </div>
+                            <div class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <span>File management and organization tasks</span>
+                            </div>
+                        </div>
+                        <div class="progress-tracker">
+                            <h4>Assessment Progress</h4>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="assessmentProgress" style="width: 0%"></div>
+                            </div>
+                            <p id="progressText">Complete the assessment to see your automation potential</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h2 class="step-title">Tool Selection</h2>
+                </div>
+                <div class="step-content">
+                    <p class="step-description">
+                        Choose the right no-code platform based on your specific needs, technical capabilities, and integration requirements.
+                    </p>
+                    
+                    <div class="interactive-demo">
+                        <h3 class="demo-title">🛠️ Platform Comparison Tool</h3>
+                        <div class="tool-selector">
+                            <div class="tool-card" onclick="selectTool(this, 'zapier')">
+                                <div class="tool-icon">⚡</div>
+                                <div class="tool-name">Zapier</div>
+                                <div class="tool-description">Best for simple integrations</div>
+                            </div>
+                            <div class="tool-card" onclick="selectTool(this, 'make')">
+                                <div class="tool-icon">🔧</div>
+                                <div class="tool-name">Make.com</div>
+                                <div class="tool-description">Advanced workflow builder</div>
+                            </div>
+                            <div class="tool-card" onclick="selectTool(this, 'n8n')">
+                                <div class="tool-icon">🔗</div>
+                                <div class="tool-name">n8n</div>
+                                <div class="tool-description">Self-hosted solution</div>
+                            </div>
+                            <div class="tool-card" onclick="selectTool(this, 'power-automate')">
+                                <div class="tool-icon">🚀</div>
+                                <div class="tool-name">Power Automate</div>
+                                <div class="tool-description">Microsoft ecosystem</div>
+                            </div>
+                        </div>
+                        <div id="toolRecommendation" class="workflow-builder" style="display: none;">
+                            <h4>Recommended Configuration:</h4>
+                            <div id="toolConfig"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h2 class="step-title">Workflow Design</h2>
+                </div>
+                <div class="step-content">
+                    <p class="step-description">
+                        Map out your automation workflows with clear triggers, actions, and error handling procedures.
+                    </p>
+                    
+                    <div class="interactive-demo">
+                        <h3 class="demo-title">🎯 Workflow Builder</h3>
+                        <div class="workflow-builder">
+                            <div class="workflow-step">
+                                <span>📥</span>
+                                <span>Trigger: New entry in database</span>
+                                <span class="workflow-arrow">→</span>
+                            </div>
+                            <div class="workflow-step">
+                                <span>🔍</span>
+                                <span>Action: Validate data format</span>
+                                <span class="workflow-arrow">→</span>
+                            </div>
+                            <div class="workflow-step">
+                                <span>📧</span>
+                                <span>Action: Send notification to team</span>
+                                <span class="workflow-arrow">→</span>
+                            </div>
+                            <div class="workflow-step">
+                                <span>📊</span>
+                                <span>Action: Update dashboard</span>
+                                <span class="workflow-arrow">✅</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addWorkflowStep()">+ Add Step</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h2 class="step-title">ROI Calculation</h2>
+                </div>
+                <div class="step-content">
+                    <p class="step-description">
+                        Calculate the return on investment to justify automation implementation and track success metrics.
+                    </p>
+                    
+                    <div class="interactive-demo">
+                        <h3 class="demo-title">💰 ROI Calculator</h3>
+                        <div class="roi-calculator">
+                            <div class="calculator-grid">
+                                <div class="input-group">
+                                    <label class="input-label">Hours saved per week</label>
+                                    <input type="number" class="input-field" id="hoursSaved" placeholder="20" oninput="calculateROI()">
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-label">Hourly rate ($)</label>
+                                    <input type="number" class="input-field" id="hourlyRate" placeholder="25" oninput="calculateROI()">
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-label">Implementation cost ($)</label>
+                                    <input type="number" class="input-field" id="implementationCost" placeholder="500" oninput="calculateROI()">
+                                </div>
+                                <div class="input-group">
+                                    <label class="input-label">Monthly tool cost ($)</label>
+                                    <input type="number" class="input-field" id="monthlyCost" placeholder="50" oninput="calculateROI()">
+                                </div>
+                            </div>
+                            
+                            <div class="calculator-grid">
+                                <div class="result-card">
+                                    <div class="result-value" id="monthlySavings">$0</div>
+                                    <div class="result-label">Monthly Savings</div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-value" id="annualSavings">$0</div>
+                                    <div class="result-label">Annual Savings</div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-value" id="paybackPeriod">0</div>
+                                    <div class="result-label">Payback Period (months)</div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-value" id="roiPercentage">0%</div>
+                                    <div class="result-label">Annual ROI</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">5</div>
+                    <h2 class="step-title">Implementation & Testing</h2>
+                </div>
+                <div class="step-content">
+                    <p class="step-description">
+                        Deploy automation gradually with thorough testing and monitoring to ensure reliable operation.
+                    </p>
+                    
+                    <div class="interactive-demo">
+                        <h3 class="demo-title">🧪 Implementation Checklist</h3>
+                        <div class="checklist">
+                            <div class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <span>Set up development/test environment</span>
+                            </div>
+                            <div class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <span>Configure API connections and authentication</span>
+                            </div>
+                            <div class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <span>Create workflows with error handling</span>
+                            </div>
+                            <div class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <span>Test with sample data</span>
+                            </div>
+                            <div class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <span>Deploy to production with monitoring</span>
+                            </div>
+                            <div class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <span>Train team on new processes</span>
+                            </div>
+                            <div class="checklist-item" onclick="toggleCheck(this)">
+                                <div class="checkbox"></div>
+                                <span>Document workflows and troubleshooting</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-card">
+                <div class="resource-icon">📚</div>
+                <h3 class="resource-title">Learning Resources</h3>
+                <p>Comprehensive tutorials, documentation, and best practices for no-code automation platforms.</p>
+                <div class="action-buttons">
+                    <a href="automation-paper.html" class="btn btn-primary">📄 Read Research Paper</a>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-icon">🛠️</div>
+                <h3 class="resource-title">Templates & Tools</h3>
+                <p>Ready-to-use workflow templates and configuration examples for common automation scenarios.</p>
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="downloadTemplate()">📥 Download Templates</button>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-icon">📊</div>
+                <h3 class="resource-title">Monitoring Dashboard</h3>
+                <p>Track automation performance, ROI metrics, and identify optimization opportunities.</p>
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" onclick="openDashboard()">📈 View Dashboard</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="startImplementation()">🚀 Start Implementation</button>
+            <a href="data-visualization.html" class="btn btn-secondary">📊 View Case Study Data</a>
+            <button class="btn btn-secondary" onclick="scheduleConsultation()">📅 Schedule Consultation</button>
+        </div>
+    </div>
+
+    <script>
+        let checkedItems = 0;
+        let totalItems = 0;
+        
+        // Initialize counters
+        document.addEventListener('DOMContentLoaded', function() {
+            totalItems = document.querySelectorAll('.checklist-item').length;
+            calculateROI(); // Initialize ROI calculator
+        });
+
+        function toggleCheck(item) {
+            const checkbox = item.querySelector('.checkbox');
+            const isChecked = checkbox.classList.contains('checked');
+            
+            if (isChecked) {
+                checkbox.classList.remove('checked');
+                checkbox.innerHTML = '';
+                checkedItems--;
+            } else {
+                checkbox.classList.add('checked');
+                checkbox.innerHTML = '✓';
+                checkedItems++;
+            }
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const assessmentItems = document.querySelectorAll('.checklist .checklist-item').length;
+            const assessmentChecked = document.querySelectorAll('.checklist .checkbox.checked').length;
+            const progress = (assessmentChecked / assessmentItems) * 100;
+            
+            document.getElementById('assessmentProgress').style.width = progress + '%';
+            
+            if (progress === 100) {
+                document.getElementById('progressText').textContent = '🎉 Assessment complete! High automation potential identified.';
+            } else if (progress > 60) {
+                document.getElementById('progressText').textContent = `${Math.round(progress)}% complete - Good automation opportunities found!`;
+            } else if (progress > 0) {
+                document.getElementById('progressText').textContent = `${Math.round(progress)}% complete - Continue assessment...`;
+            }
+        }
+
+        function selectTool(element, tool) {
+            // Remove active class from all tools
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            // Add active class to selected tool
+            element.classList.add('active');
+            
+            // Show recommendation
+            const recommendation = document.getElementById('toolRecommendation');
+            const config = document.getElementById('toolConfig');
+            
+            const toolConfigs = {
+                'zapier': {
+                    name: 'Zapier',
+                    pros: ['Easy to use', 'Wide app integration', 'Great for beginners'],
+                    use_case: 'Simple trigger-action workflows',
+                    setup_time: '1-2 hours',
+                    monthly_cost: '$20-50'
+                },
+                'make': {
+                    name: 'Make.com',
+                    pros: ['Visual workflow builder', 'Advanced logic', 'Great value'],
+                    use_case: 'Complex multi-step workflows',
+                    setup_time: '2-4 hours',
+                    monthly_cost: '$10-30'
+                },
+                'n8n': {
+                    name: 'n8n',
+                    pros: ['Self-hosted', 'Open source', 'Full control'],
+                    use_case: 'Custom enterprise solutions',
+                    setup_time: '4-8 hours',
+                    monthly_cost: '$0-20'
+                },
+                'power-automate': {
+                    name: 'Power Automate',
+                    pros: ['Microsoft integration', 'Enterprise features', 'AI capabilities'],
+                    use_case: 'Microsoft-heavy environments',
+                    setup_time: '2-3 hours',
+                    monthly_cost: '$15-40'
+                }
+            };
+            
+            const toolData = toolConfigs[tool];
+            config.innerHTML = `
+                <h5>${toolData.name} Configuration</h5>
+                <p><strong>Best for:</strong> ${toolData.use_case}</p>
+                <p><strong>Setup time:</strong> ${toolData.setup_time}</p>
+                <p><strong>Monthly cost:</strong> ${toolData.monthly_cost}</p>
+                <p><strong>Key benefits:</strong> ${toolData.pros.join(', ')}</p>
+            `;
+            
+            recommendation.style.display = 'block';
+        }
+
+        function calculateROI() {
+            const hoursSaved = parseFloat(document.getElementById('hoursSaved').value) || 0;
+            const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+            const implementationCost = parseFloat(document.getElementById('implementationCost').value) || 0;
+            const monthlyCost = parseFloat(document.getElementById('monthlyCost').value) || 0;
+            
+            const weeklySavings = hoursSaved * hourlyRate;
+            const monthlySavings = weeklySavings * 4.33; // Average weeks per month
+            const netMonthlySavings = monthlySavings - monthlyCost;
+            const annualSavings = netMonthlySavings * 12;
+            
+            let paybackPeriod = 0;
+            if (netMonthlySavings > 0) {
+                paybackPeriod = Math.ceil(implementationCost / netMonthlySavings);
+            }
+            
+            let roiPercentage = 0;
+            if (implementationCost > 0) {
+                roiPercentage = ((annualSavings - implementationCost) / implementationCost) * 100;
+            }
+            
+            document.getElementById('monthlySavings').textContent = '$' + Math.round(netMonthlySavings);
+            document.getElementById('annualSavings').textContent = '$' + Math.round(annualSavings);
+            document.getElementById('paybackPeriod').textContent = paybackPeriod;
+            document.getElementById('roiPercentage').textContent = Math.round(roiPercentage) + '%';
+        }
+
+        function addWorkflowStep() {
+            const workflowBuilder = document.querySelector('.workflow-builder');
+            const newStep = document.createElement('div');
+            newStep.className = 'workflow-step';
+            newStep.innerHTML = `
+                <span>⚙️</span>
+                <span>Action: Custom step</span>
+                <span class="workflow-arrow">→</span>
+            `;
+            workflowBuilder.insertBefore(newStep, workflowBuilder.lastElementChild);
+        }
+
+        function startImplementation() {
+            alert('🚀 Implementation started! You will receive a detailed project plan via email within 24 hours.');
+        }
+
+        function downloadTemplate() {
+            // Simulate download
+            const templates = [
+                'Database Update Workflow Template',
+                'Team Notification System Template',
+                'Production Schedule Automation Template',
+                'Error Handling Best Practices'
+            ];
+            
+            alert('📥 Downloading templates:\n• ' + templates.join('\n• '));
+        }
+
+        function openDashboard() {
+            window.open('data-visualization.html', '_blank');
+        }
+
+        function scheduleConsultation() {
+            alert('📅 Consultation scheduled! A calendar invite will be sent to discuss your specific automation needs.');
+        }
+
+        // Simulate real-time data updates
+        setInterval(function() {
+            const savingsElement = document.getElementById('monthlySavings');
+            if (savingsElement && savingsElement.textContent !== '$0') {
+                // Add subtle animation to show live data
+                savingsElement.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    savingsElement.style.transform = 'scale(1)';
+                }, 200);
+            }
+        }, 10000);
+    </script>
+</body>
+</html>
