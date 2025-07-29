@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects & Solutions - Mayo Martinez</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.birds.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.dots.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Animated Background */
+        #vanta-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            background: linear-gradient(135deg, rgba(102,126,234,0.8) 0%, rgba(118,75,162,0.8) 100%);
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            z-index: 10;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        /* Main Content */
+        main {
+            background: white;
+            position: relative;
+            z-index: 1;
+            border-radius: 30px 30px 0 0;
+            overflow: hidden;
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.1);
+            margin-top: -30px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #718096;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            line-height: 1.6;
+        }
+
+        /* Project Cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1));
+            transition: width 0.4s ease;
+            z-index: 1;
+        }
+
+        .project-card:hover::before {
+            width: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .project-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-type {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .impact-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-content {
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-description {
+            color: #4a5568;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            background: #f7fafc;
+            color: #4a5568;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .paper-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-small {
+            padding: 10px 25px;
+            font-size: 0.9rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline {
+            border: 2px solid #667eea;
+            color: #667eea;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.3);
+        }
+
+        /* Automation Section Styling */
+        .automation-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 4rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div id="vanta-bg"></div>
+
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Mayo Martinez</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Projects & Solutions</h1>
+            <p class="subtitle">Technical implementations that solve real-world challenges</p>
+        </div>
+    </section>
+
+    <main>
+        <section class="container scroll-animate">
+            <h2 class="section-title">Technical Development</h2>
+            <p class="section-subtitle">
+                Code-based solutions demonstrating analytical thinking and technical implementation skills
+            </p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Financial Data Analysis (PyBank)</h3>
+                        <p class="project-type">Data Science • Python</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Comprehensive financial data analysis tool for processing and visualizing banking datasets. Implements statistical analysis, trend identification, and automated reporting capabilities with advanced data validation and error handling.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">Matplotlib</span>
+                            <span class="tech-tag">Statistical Analysis</span>
+                            <span class="tech-tag">Data Validation</span>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://github.com/Mayomh11/PyBank" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Weather Data Analytics (WeatherPy)</h3>
+                        <p class="project-type">API Integration • Data Visualization</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Advanced weather data analysis platform utilizing API integrations and statistical modeling to identify climate patterns and correlations across global datasets. Features interactive visualizations and predictive modeling capabilities.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">REST APIs</span>
+                            <span class="tech-tag">Jupyter</span>
+                            <span class="tech-tag">Data Visualization</span>
+                            <span class="tech-tag">Statistical Modeling</span>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://github.com/Mayomh11/WeatherPy" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Database Investigation</h3>
+                        <p class="project-type">SQL • Database Design</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Complex database analysis project involving data modeling, query optimization, and mystery-solving through systematic data investigation techniques. Demonstrates advanced SQL skills and analytical problem-solving.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">PL/pgSQL</span>
+                            <span class="tech-tag">Data Modeling</span>
+                            <span class="tech-tag">Query Optimization</span>
+                            <span class="tech-tag">ERD Design</span>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://github.com/Mayomh11/Employee-Database-A-Mystery-in-Two-Parts" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">FerengAI</h3>
+                        <p class="project-type">AI • Machine Learning</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            AI-powered application demonstrating machine learning capabilities and intelligent automation. Explores artificial intelligence implementations with practical applications in data processing and decision-making systems.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">Jupyter Notebook</span>
+                            <span class="tech-tag">AI Algorithms</span>
+                            <span class="tech-tag">Data Processing</span>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://github.com/Mayomh11/FerengAI" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Mission to Mars</h3>
+                        <p class="project-type">Web Scraping • Data Science</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Comprehensive Mars exploration data aggregation system that scrapes multiple NASA sources, processes space mission data, and creates interactive web dashboards for Mars mission information and imagery.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Web Scraping</span>
+                            <span class="tech-tag">BeautifulSoup</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://github.com/Mayomh11/Mission-to-Mars" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Data Journalism with D3</h3>
+                        <p class="project-type">Data Visualization • D3.js</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Interactive data journalism platform using D3.js for advanced data visualization and storytelling. Features dynamic charts, responsive design, and compelling visual narratives from complex datasets.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">D3.js</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML/CSS</span>
+                            <span class="tech-tag">Data Visualization</span>
+                            <span class="tech-tag">Interactive Charts</span>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://github.com/Mayomh11/Data-Journalism-and-D3" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <h3 class="project-title">Rosagnah.com</h3>
+                        <p class="project-type">TypeScript • Modern Web Development</p>
+                    </div>
+                    <div class="project-content">
+                        <p class="project-description">
+                            Modern TypeScript-based website showcasing advanced web development practices with type-safe code, modern tooling, and responsive design. Demonstrates proficiency in contemporary web technologies and development workflows.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">Modern JavaScript</span>
+                            <span class="tech-tag">Web Development</span>
+                            <span class="tech-tag">Responsive Design</span>
+                            <span class="tech-tag">Build Tools</span>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://github.com/Mayomh11/rosagnah.com" class="btn-small btn-outline">View Code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="automation-section">
+            <div class="container scroll-animate">
+                <h2 class="section-title">Automation & Systems</h2>
+                <p class="section-subtitle">
+                    Real-world implementations that delivered measurable business impact
+                </p>
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">Operations Automation Suite</h3>
+                            <p class="project-type">Process Engineering</p>
+                            <div class="impact-badge">40% Efficiency Gain</div>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-description">
+                                Comprehensive automation system for luxury fashion operations including employee onboarding workflows, timesheet processing, and purchase order management. Reduced administrative overhead by 40% while improving accuracy and compliance across all processes.
+                            </p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Make.com</span>
+                                <span class="tech-tag">Monday.com</span>
+                                <span class="tech-tag">API Integration</span>
+                                <span class="tech-tag">Workflow Design</span>
+                                <span class="tech-tag">Process Optimization</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">Supply Chain Integration</h3>
+                            <p class="project-type">Multi-Platform Automation</p>
+                            <div class="impact-badge">Global Coordination</div>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-description">
+                                Automated vendor communication and inventory tracking system spanning multiple time zones and platforms. Streamlined coordination for high-end fashion production workflows with real-time updates and automated notifications.
+                            </p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">n8n</span>
+                                <span class="tech-tag">Airtable</span>
+                                <span class="tech-tag">Slack Integration</span>
+                                <span class="tech-tag">Multi-timezone</span>
+                                <span class="tech-tag">Vendor Management</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">Data Pipeline Automation</h3>
+                            <p class="project-type">CRM/ERP Integration</p>
+                            <div class="impact-badge">Real-time Sync</div>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-description">
+                                Automated data synchronization and reporting system for client, supplier, and project management. Features real-time dashboards, automated alerts for production timeline management, and comprehensive data validation.
+                            </p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Database Integration</span>
+                                <span class="tech-tag">Real-time Sync</span>
+                                <span class="tech-tag">Automated Reporting</span>
+                                <span class="tech-tag">Dashboard Design</span>
+                                <span class="tech-tag">Data Validation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">Client Communication Hub</h3>
+                            <p class="project-type">Communication Automation</p>
+                            <div class="impact-badge">24/7 Response</div>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-description">
+                                Intelligent client communication system with automated follow-ups, project status updates, and milestone notifications. Integrated with CRM systems to maintain comprehensive client interaction history.
+                            </p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Email Automation</span>
+                                <span class="tech-tag">CRM Integration</span>
+                                <span class="tech-tag">Template Management</span>
+                                <span class="tech-tag">Workflow Triggers</span>
+                                <span class="tech-tag">Analytics Tracking</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">Quality Control System</h3>
+                            <p class="project-type">Automated Quality Assurance</p>
+                            <div class="impact-badge">Zero Defect Rate</div>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-description">
+                                Comprehensive quality control automation for luxury fashion production. Includes automated inspection workflows, defect tracking, and supplier performance monitoring with detailed analytics and reporting.
+                            </p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Quality Metrics</span>
+                                <span class="tech-tag">Inspection Workflows</span>
+                                <span class="tech-tag">Supplier Scoring</span>
+                                <span class="tech-tag">Performance Analytics</span>
+                                <span class="tech-tag">Compliance Tracking</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">Financial Reporting Automation</h3>
+                            <p class="project-type">Business Intelligence</p>
+                            <div class="impact-badge">Daily Reports</div>
+                        </div>
+                        <div class="project-content">
+                            <p class="project-description">
+                                Automated financial reporting system that consolidates data from multiple sources to generate daily, weekly, and monthly reports. Features predictive analytics and trend identification for strategic decision-making.
+                            </p>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Business Intelligence</span>
+                                <span class="tech-tag">Data Consolidation</span>
+                                <span class="tech-tag">Predictive Analytics</span>
+                                <span class="tech-tag">Report Generation</span>
+                                <span class="tech-tag">Trend Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Vanta.js initialization for projects page
+        let vantaEffect;
+        
+        function initVanta() {
+            if (typeof VANTA !== 'undefined' && VANTA.BIRDS) {
+                vantaEffect = VANTA.BIRDS({
+                    el: "#vanta-bg",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color1: 0x667eea,
+                    color2: 0x764ba2,
+                    backgroundColor: 0x0a0a1a,
+                    quantity: 3,
+                    birdSize: 1.0,
+                    wingSpan: 20,
+                    speedLimit: 3
+                });
+            }
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initVanta, 500);
+        });
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (vantaEffect) {
+                vantaEffect.destroy();
+            }
+        });
+    </script>
+</body>
+</html>

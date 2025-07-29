@@ -840,7 +840,14 @@
             }
 
             .nav-links {
-                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.98);
+                padding: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             }
 
             .cta-buttons {
@@ -880,13 +887,11 @@
 
     <header>
         <nav class="container">
-            <div class="logo">Mayo Martinez</div>
+            <a href="index.html" class="logo">Mayo Martinez</a>
             <ul class="nav-links">
-                <li><a href="#research">Research</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#automation">Automation</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
     </header>
@@ -899,8 +904,8 @@
                 I bridge the gap between cutting-edge research and practical implementation. From analyzing AI's impact on emerging economies to automating luxury fashion operations, I transform insights into efficiency and innovation into results.
             </p>
             <div class="cta-buttons">
-                <a href="#research" class="btn btn-primary">View Research</a>
-                <a href="#projects" class="btn btn-secondary">See Projects</a>
+                <a href="research.html" class="btn btn-primary">View Research</a>
+                <a href="projects.html" class="btn btn-secondary">See Projects</a>
             </div>
             
             <!-- Alien-tech Effect Controls -->
@@ -914,230 +919,65 @@
     </section>
 
     <main>
-        <section id="research" class="container scroll-animate">
-            <h2 class="section-title">Research & Publications</h2>
+        <section class="container scroll-animate">
+            <h2 class="section-title">What I Do</h2>
             <p class="section-subtitle">
-                Deep-dive analysis combining academic rigor with real-world implementation experience
-            </p>
-            
-            <div class="research-grid">
-                <div class="research-paper">
-                    <h3 class="paper-title">The Impact of AI on Job Markets in Emerging Economies</h3>
-                    <p class="paper-description">
-                        A comprehensive analysis examining how artificial intelligence adoption affects employment patterns, wage structures, and economic development in emerging markets. This research combines quantitative data analysis with case studies from multiple countries to provide actionable insights for policymakers and business leaders.
-                    </p>
-                    <div class="paper-tags">
-                        <span class="tag">AI & Economics</span>
-                        <span class="tag">Labor Markets</span>
-                        <span class="tag">Data Analysis</span>
-                        <span class="tag">Policy Research</span>
-                    </div>
-                    <div class="paper-actions">
-                        <a href="ai-economics-paper.html" class="btn-small btn-outline">Read Paper</a>
-                        <a href="data-visualization.html" class="btn-small btn-outline">View Data</a>
-                    </div>
-                </div>
-
-                <div class="research-paper">
-                    <h3 class="paper-title">The Impact of No-Code Automation</h3>
-                    <p class="paper-description">
-                        An in-depth study on how no-code and low-code platforms are democratizing automation across industries. Drawing from hands-on implementation experience, this research explores efficiency gains, adoption barriers, and future implications for business operations and workforce development.
-                    </p>
-                    <div class="paper-tags">
-                        <span class="tag">Automation</span>
-                        <span class="tag">Digital Transformation</span>
-                        <span class="tag">Business Operations</span>
-                        <span class="tag">Case Studies</span>
-                    </div>
-                    <div class="paper-actions">
-                        <a href="automation-paper.html" class="btn-small btn-outline">Read Paper</a>
-                        <a href="implementation-guide.html" class="btn-small btn-outline">Implementation Guide</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="container scroll-animate">
-            <h2 class="section-title">Technical Projects</h2>
-            <p class="section-subtitle">
-                Code-based solutions demonstrating analytical thinking and technical implementation skills
+                Research-driven solutions that deliver real-world impact
             </p>
             
             <div class="projects-grid">
                 <div class="project-card">
                     <div class="project-header">
-                        <h3 class="project-title">Financial Data Analysis (PyBank)</h3>
-                        <p class="project-type">Data Science • Python</p>
+                        <h3 class="project-title">Research & Analysis</h3>
+                        <p class="project-type">Deep-dive studies • Data-driven insights</p>
                     </div>
                     <div class="project-content">
                         <p class="project-description">
-                            Comprehensive financial data analysis tool for processing and visualizing banking datasets. Implements statistical analysis, trend identification, and automated reporting capabilities.
+                            From AI's impact on emerging economies to automation democratization, I conduct comprehensive research that bridges academic rigor with practical implementation.
                         </p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Pandas</span>
-                            <span class="tech-tag">Matplotlib</span>
-                            <span class="tech-tag">Statistical Analysis</span>
-                        </div>
                         <div class="paper-actions">
-                            <a href="https://github.com/Mayomh11/PyBank" class="btn-small btn-outline">View Code</a>
+                            <a href="research.html" class="btn-small btn-outline">View Research</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-header">
-                        <h3 class="project-title">Weather Data Analytics (WeatherPy)</h3>
-                        <p class="project-type">API Integration • Data Visualization</p>
+                        <h3 class="project-title">Technical Development</h3>
+                        <p class="project-type">Code solutions • System integration</p>
                     </div>
                     <div class="project-content">
                         <p class="project-description">
-                            Advanced weather data analysis platform utilizing API integrations and statistical modeling to identify climate patterns and correlations across global datasets.
+                            Python-based analytics, database investigations, API integrations, and automation systems that solve complex business challenges.
                         </p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">APIs</span>
-                            <span class="tech-tag">Jupyter</span>
-                            <span class="tech-tag">Data Visualization</span>
-                        </div>
                         <div class="paper-actions">
-                            <a href="https://github.com/Mayomh11/WeatherPy" class="btn-small btn-outline">View Code</a>
+                            <a href="projects.html" class="btn-small btn-outline">See Projects</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="project-card">
                     <div class="project-header">
-                        <h3 class="project-title">Database Investigation</h3>
-                        <p class="project-type">SQL • Database Design</p>
+                        <h3 class="project-title">Operations Excellence</h3>
+                        <p class="project-type">Process automation • Efficiency gains</p>
                     </div>
                     <div class="project-content">
                         <p class="project-description">
-                            Complex database analysis project involving data modeling, query optimization, and mystery-solving through systematic data investigation techniques.
+                            Delivered 40% efficiency improvements through automated workflows, supply chain integration, and data pipeline optimization.
                         </p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">PL/pgSQL</span>
-                            <span class="tech-tag">Data Modeling</span>
-                            <span class="tech-tag">Query Optimization</span>
-                        </div>
                         <div class="paper-actions">
-                            <a href="https://github.com/Mayomh11/Employee-Database-A-Mystery-in-Two-Parts" class="btn-small btn-outline">View Code</a>
+                            <a href="about.html" class="btn-small btn-outline">Learn More</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="automation" class="container scroll-animate">
-            <h2 class="section-title">Automation & Systems</h2>
-            <p class="section-subtitle">
-                Real-world implementations that delivered measurable business impact
-            </p>
-            
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Operations Automation Suite</h3>
-                        <p class="project-type">Process Engineering • 40% Efficiency Gain</p>
-                    </div>
-                    <div class="project-content">
-                        <p class="project-description">
-                            Comprehensive automation system for luxury fashion operations including onboarding workflows, timesheet processing, and purchase order management. Reduced administrative overhead by 40% while improving accuracy and compliance.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Make.com</span>
-                            <span class="tech-tag">Monday.com</span>
-                            <span class="tech-tag">API Integration</span>
-                            <span class="tech-tag">Workflow Design</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Supply Chain Integration</h3>
-                        <p class="project-type">Multi-Platform Automation</p>
-                    </div>
-                    <div class="project-content">
-                        <p class="project-description">
-                            Automated vendor communication and inventory tracking system spanning multiple time zones and platforms. Streamlined coordination for high-end fashion production workflows.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">n8n</span>
-                            <span class="tech-tag">Airtable</span>
-                            <span class="tech-tag">Slack Integration</span>
-                            <span class="tech-tag">Multi-timezone</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3 class="project-title">Data Pipeline Automation</h3>
-                        <p class="project-type">CRM/ERP Integration</p>
-                    </div>
-                    <div class="project-content">
-                        <p class="project-description">
-                            Automated data synchronization and reporting system for client, supplier, and project management. Real-time dashboards and alerts for production timeline management.
-                        </p>
-                        <div class="tech-stack">
-                            <span class="tech-tag">Database Integration</span>
-                            <span class="tech-tag">Real-time Sync</span>
-                            <span class="tech-tag">Automated Reporting</span>
-                            <span class="tech-tag">Dashboard Design</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="container scroll-animate">
-            <h2 class="section-title">Core Capabilities</h2>
-            <p class="section-subtitle">
-                A unique combination of research depth, technical skills, and operational excellence
-            </p>
-            
-            <div class="skills-container">
-                <div class="skill-category">
-                    <div class="skill-icon">📊</div>
-                    <h3 class="skill-title">Research & Analysis</h3>
-                    <div class="skill-list">
-                        Academic Research • Data Analysis • Statistical Modeling • Economic Analysis • Policy Research • Market Studies • Quantitative Methods
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-icon">💻</div>
-                    <h3 class="skill-title">Programming & Development</h3>
-                    <div class="skill-list">
-                        Python • R • SQL • C++ • C# • JavaScript • HTML/CSS • API Development • Database Design • Version Control
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-icon">⚡</div>
-                    <h3 class="skill-title">Automation & Integration</h3>
-                    <div class="skill-list">
-                        Make.com • n8n • Monday.com • Airtable • Zapier • API Integration • Workflow Design • Process Optimization
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <div class="skill-icon">🎯</div>
-                    <h3 class="skill-title">Product & Operations</h3>
-                    <div class="skill-list">
-                        Product Development • Supply Chain • Project Management • Team Leadership • Process Engineering • Quality Control
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact">
+        <section class="contact">
             <div class="container scroll-animate">
-                <h2 class="section-title">Let's Connect</h2>
+                <h2 class="section-title">Ready to Connect?</h2>
                 <p class="section-subtitle">
-                    Ready to discuss research collaborations, technical projects, or operational challenges
+                    Let's discuss how research and technology can solve your challenges
                 </p>
                 
                 <div class="contact-links">
@@ -1146,12 +986,6 @@
                     </a>
                     <a href="https://linkedin.com/in/mayo-martinez-791492160" class="contact-link">
                         <span>🔗</span> LinkedIn
-                    </a>
-                    <a href="https://github.com/Mayomh11" class="contact-link">
-                        <span>🐙</span> GitHub
-                    </a>
-                    <a href="https://www.m4io.com" class="contact-link">
-                        <span>🌐</span> m4io.com
                     </a>
                 </div>
             </div>
@@ -1555,7 +1389,7 @@
             requestAnimationFrame(monitorFrameRate);
         }
 
-        // Smooth scrolling for navigation links
+        // Smooth scrolling for anchor links (if any exist on page)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();

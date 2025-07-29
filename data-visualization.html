@@ -48,8 +48,8 @@
             padding: 3rem;
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
             text-align: center;
+            margin-bottom: 3rem;
         }
 
         .page-title {
@@ -57,89 +57,16 @@
             font-weight: 700;
             color: #2c3e50;
             margin-bottom: 1rem;
-            line-height: 1.2;
         }
 
         .page-subtitle {
-            color: #718096;
             font-size: 1.2rem;
-            margin-bottom: 1rem;
+            color: #718096;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .visualization-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .chart-section {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            margin-bottom: 2rem;
-        }
-
-        .chart-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .chart-description {
-            color: #4a5568;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-
-        .chart-container {
-            margin: 2rem 0;
-            min-height: 400px;
-        }
-
-        .data-insights {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .insight-card {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            border-left: 4px solid #667eea;
-            transition: transform 0.3s ease;
-        }
-
-        .insight-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .insight-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #2c3e50;
-            margin-bottom: 1rem;
-        }
-
-        .insight-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #667eea;
-            margin-bottom: 0.5rem;
-        }
-
-        .insight-description {
-            color: #4a5568;
-            font-size: 1rem;
-        }
-
-        .interactive-controls {
+        .chart-navigation {
             background: #f8fafc;
             padding: 2rem;
             border-radius: 15px;
@@ -147,111 +74,90 @@
             text-align: center;
         }
 
-        .control-group {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin: 1rem 0;
-            flex-wrap: wrap;
+        .chart-navigation h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
         }
 
-        .control-btn {
-            padding: 10px 20px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
+        .chart {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
 
-        .control-btn:hover {
-            background: #764ba2;
-            transform: translateY(-2px);
-        }
-
-        .control-btn.active {
-            background: #764ba2;
-            box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+        .chart-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+            font-size: 1.3rem;
+            font-weight: 600;
         }
 
         .data-table {
-            overflow-x: auto;
+            background: white;
+            padding: 2rem;
             margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
 
-        table {
+        .data-table table {
             width: 100%;
             border-collapse: collapse;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-top: 1rem;
         }
 
-        th, td {
-            padding: 1rem;
+        .data-table th,
+        .data-table td {
+            padding: 12px;
             text-align: left;
             border-bottom: 1px solid #e2e8f0;
         }
 
-        th {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            font-weight: 600;
-        }
-
-        tr:hover {
+        .data-table th {
             background: #f8fafc;
+            font-weight: 600;
+            color: #2c3e50;
         }
 
-        .download-section {
+        .paper-reference {
             background: white;
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
             margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
 
         .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 12px 25px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: inline-block;
+            padding: 12px 24px;
+            background: #667eea;
             color: white;
             text-decoration: none;
             border-radius: 25px;
             font-weight: 500;
             transition: all 0.3s ease;
-            margin: 0.5rem;
+            border: none;
+            cursor: pointer;
         }
 
         .download-btn:hover {
+            background: #764ba2;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 25px rgba(118, 75, 162, 0.3);
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .page-header {
-                padding: 2rem;
-            }
-            
             .page-title {
                 font-size: 2rem;
             }
-
-            .chart-section {
-                padding: 1.5rem;
-            }
-
-            .data-insights {
-                grid-template-columns: 1fr;
+            
+            .container {
+                padding: 1rem;
             }
         }
     </style>
@@ -259,164 +165,92 @@
 <body>
     <div class="container">
         <nav class="back-nav">
-            <a href="index.html" class="back-btn">
-                ← Back to Portfolio
+            <a href="research.html" class="back-btn">
+                ← Back to Research
             </a>
         </nav>
 
         <header class="page-header">
             <h1 class="page-title">AI Economics Data Visualization</h1>
-            <p class="page-subtitle">Interactive Analysis of AI's Impact on Job Markets in Emerging Economies</p>
-            <p>Explore comprehensive data visualizations and insights from our research on artificial intelligence adoption in developing markets.</p>
+            <p class="page-subtitle">Interactive charts and data analysis from "The Impact of AI on Job Markets in Emerging Economies" research paper</p>
         </header>
 
-        <section class="chart-section">
-            <h2 class="chart-title">Job Displacement Risk by Location</h2>
-            <p class="chart-description">
-                Comparative analysis showing how AI adoption affects employment differently in urban versus rural areas
-            </p>
-            <div class="chart-container" id="displacement_chart"></div>
-        </section>
-
-        <section class="chart-section">
-            <h2 class="chart-title">GDP Growth Projections (2025-2045)</h2>
-            <p class="chart-description">
-                Projected economic growth in the Asia-Pacific region driven by AI integration
-            </p>
-            <div class="chart-container" id="gdp_projection_chart"></div>
-        </section>
-
-        <section class="chart-section">
-            <h2 class="chart-title">AI Policy Implementation Timeline</h2>
-            <p class="chart-description">
-                Major AI policy milestones across different countries and regions
-            </p>
-            <div class="chart-container" id="policy_timeline_chart"></div>
-        </section>
-
-        <section class="chart-section">
-            <h2 class="chart-title">Financial Accuracy Improvement Over Time</h2>
-            <p class="chart-description">
-                How AI-driven financial tools improve decision-making accuracy in emerging economies
-            </p>
-            <div class="chart-container" id="financial_accuracy_chart"></div>
-        </section>
-
-        <div class="data-insights">
-            <div class="insight-card">
-                <h3 class="insight-title">Urban Job Displacement</h3>
-                <div class="insight-value">70%</div>
-                <p class="insight-description">Higher risk of job displacement in urban areas due to AI automation of knowledge work</p>
-            </div>
-            
-            <div class="insight-card">
-                <h3 class="insight-title">Rural Job Protection</h3>
-                <div class="insight-value">20%</div>
-                <p class="insight-description">Lower displacement risk in rural areas where physical tasks remain less automatable</p>
-            </div>
-            
-            <div class="insight-card">
-                <h3 class="insight-title">GDP Growth Potential</h3>
-                <div class="insight-value">16%</div>
-                <p class="insight-description">Projected GDP increase in Asia-Pacific region by 2030 through AI adoption</p>
-            </div>
-            
-            <div class="insight-card">
-                <h3 class="insight-title">Financial Accuracy</h3>
-                <div class="insight-value">55%</div>
-                <p class="insight-description">Improvement in financial decision-making accuracy over 10 years with AI tools</p>
-            </div>
+        <div class="chart-navigation">
+            <h3>Research Data Summary</h3>
+            <p style="color: #4a5568; margin-bottom: 2rem;">The following charts summarize key findings from the AI Economics research paper, showing employment displacement patterns and economic projections across emerging economies.</p>
         </div>
 
-        <div class="interactive-controls">
-            <h3>Interactive Data Controls</h3>
-            <div class="control-group">
-                <button class="control-btn active" onclick="showChart('displacement')">Displacement Risk</button>
-                <button class="control-btn" onclick="showChart('gdp')">GDP Projections</button>
-                <button class="control-btn" onclick="showChart('policy')">Policy Timeline</button>
-                <button class="control-btn" onclick="showChart('financial')">Financial Impact</button>
-            </div>
-            
-            <div class="control-group">
-                <button class="control-btn" id="liveBtn" onclick="toggleLiveMode()">📊 Enable Live Data</button>
-                <button class="control-btn" onclick="filterByRegion('southeast-asia')">🌏 Southeast Asia</button>
-                <button class="control-btn" onclick="filterByRegion('south-asia')">🌏 South Asia</button>
-                <button class="control-btn" onclick="filterByRegion('east-africa')">🌍 East Africa</button>
-            </div>
-            
-            <div class="control-group">
-                <button class="control-btn" onclick="exportData('csv')">📥 Export CSV</button>
-                <button class="control-btn" onclick="exportData('json')">📥 Export JSON</button>
-                <button class="control-btn" onclick="shareAnalysis()">🔗 Share Analysis</button>
-            </div>
+        <div class="chart">
+            <h3 class="chart-title">Employment Displacement Risk by Location</h3>
+            <div id="displacement-chart"></div>
+        </div>
+
+        <div class="chart">
+            <h3 class="chart-title">GDP Growth Projections (2025-2045)</h3>
+            <div id="gdp-chart"></div>
+        </div>
+
+        <div class="chart">
+            <h3 class="chart-title">Policy Implementation Timeline</h3>
+            <div id="policy-chart"></div>
+        </div>
+
+        <div class="chart">
+            <h3 class="chart-title">Financial Impact Over Time</h3>
+            <div id="financial-chart"></div>
         </div>
 
         <div class="data-table">
-            <h3 style="text-align: center; margin-bottom: 1rem; color: #2c3e50;">Detailed Regional Analysis</h3>
+            <h3 style="text-align: center; margin-bottom: 1rem; color: #2c3e50;">Regional Analysis Summary</h3>
             <table>
                 <thead>
                     <tr>
                         <th>Region</th>
-                        <th>AI Adoption Rate (%)</th>
-                        <th>Job Displacement Risk (%)</th>
-                        <th>GDP Growth Potential (%)</th>
-                        <th>Policy Development Stage</th>
+                        <th>Displacement Risk</th>
+                        <th>GDP Impact</th>
+                        <th>Policy Readiness</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Southeast Asia</td>
-                        <td>45</td>
-                        <td>35</td>
-                        <td>18</td>
-                        <td>Active Development</td>
+                        <td>65%</td>
+                        <td>+18% by 2030</td>
+                        <td>Medium</td>
                     </tr>
                     <tr>
                         <td>South Asia</td>
-                        <td>32</td>
-                        <td>42</td>
-                        <td>22</td>
-                        <td>Early Planning</td>
+                        <td>75%</td>
+                        <td>+14% by 2030</td>
+                        <td>Low</td>
                     </tr>
                     <tr>
                         <td>East Africa</td>
-                        <td>28</td>
-                        <td>25</td>
-                        <td>15</td>
-                        <td>Research Phase</td>
+                        <td>60%</td>
+                        <td>+12% by 2030</td>
+                        <td>Low</td>
                     </tr>
                     <tr>
                         <td>Latin America</td>
-                        <td>38</td>
-                        <td>38</td>
-                        <td>14</td>
-                        <td>Policy Formation</td>
-                    </tr>
-                    <tr>
-                        <td>Central Europe</td>
-                        <td>52</td>
-                        <td>45</td>
-                        <td>12</td>
-                        <td>Implementation</td>
+                        <td>55%</td>
+                        <td>+16% by 2030</td>
+                        <td>Medium</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="download-section">
-            <h3 style="margin-bottom: 1rem; color: #2c3e50;">Download Research Data</h3>
-            <p style="margin-bottom: 2rem; color: #4a5568;">Access raw datasets and additional analysis materials</p>
-            <button class="download-btn" onclick="exportData('csv')">📊 Download Dataset (CSV)</button>
-            <button class="download-btn" onclick="exportData('json')">📥 Download Dataset (JSON)</button>
-            <a href="ai-economics-paper.html" class="download-btn">📄 View Full Paper</a>
-            <button class="download-btn" onclick="generateReport()">📈 Generate Custom Report</button>
+        <div class="paper-reference">
+            <h3 style="margin-bottom: 1rem; color: #2c3e50;">Research Paper</h3>
+            <p style="margin-bottom: 2rem; color: #4a5568;">For detailed methodology, data sources, and complete analysis, view the full research paper.</p>
+            <a href="ai-economics-paper.html" class="download-btn">📄 Read Full Paper</a>
         </div>
     </div>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {
-            packages: ['corechart', 'bar', 'timeline', 'controls']
+            packages: ['corechart', 'bar', 'timeline']
         });
         google.charts.setOnLoadCallback(drawAllCharts);
 
@@ -437,398 +271,93 @@
             ]);
 
             var options = {
-                title: 'Job Displacement Risk vs Protection Level by Location Type',
-                chartArea: { width: '70%', height: '70%' },
+                title: 'Employment Displacement Risk vs. Protection Levels',
+                titleTextStyle: { fontSize: 16, color: '#2c3e50' },
+                hAxis: { title: 'Location Type', titleTextStyle: { color: '#4a5568' } },
+                vAxis: { title: 'Percentage (%)', titleTextStyle: { color: '#4a5568' } },
                 colors: ['#ff6b6b', '#4ecdc4'],
-                hAxis: { title: 'Percentage (%)' },
-                vAxis: { title: 'Location Type' },
-                legend: { position: 'top' },
-                backgroundColor: 'transparent'
+                backgroundColor: '#ffffff',
+                legend: { position: 'bottom', textStyle: { color: '#4a5568' } }
             };
 
-            var chart = new google.visualization.BarChart(
-                document.getElementById('displacement_chart')
-            );
+            var chart = new google.visualization.ColumnChart(document.getElementById('displacement-chart'));
             chart.draw(data, options);
         }
 
         function drawGDPChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Year', 'Projected Growth (%)', 'Conservative Estimate (%)', 'Optimistic Estimate (%)'],
-                ['2025', 10, 8, 12],
-                ['2030', 16, 14, 18],
-                ['2035', 22, 19, 25],
-                ['2040', 28, 24, 32],
-                ['2045', 34, 29, 39]
+                ['Year', 'GDP Growth (%)'],
+                ['2025', 10],
+                ['2030', 16],
+                ['2035', 22],
+                ['2040', 28],
+                ['2045', 34]
             ]);
 
             var options = {
-                title: 'AI-Driven GDP Growth Projections for Asia-Pacific',
+                title: 'Projected GDP Growth with AI Integration',
+                titleTextStyle: { fontSize: 16, color: '#2c3e50' },
+                hAxis: { title: 'Year', titleTextStyle: { color: '#4a5568' } },
+                vAxis: { title: 'GDP Growth (%)', titleTextStyle: { color: '#4a5568' } },
+                colors: ['#667eea'],
+                backgroundColor: '#ffffff',
                 curveType: 'function',
-                legend: { position: 'bottom' },
-                hAxis: { title: 'Year' },
-                vAxis: { title: 'GDP Growth (%)' },
-                colors: ['#667eea', '#1b9e77', '#d95f02'],
-                backgroundColor: 'transparent',
-                lineWidth: 3
+                legend: { position: 'none' }
             };
 
-            var chart = new google.visualization.LineChart(
-                document.getElementById('gdp_projection_chart')
-            );
+            var chart = new google.visualization.LineChart(document.getElementById('gdp-chart'));
             chart.draw(data, options);
         }
 
         function drawPolicyChart() {
-            var container = document.getElementById('policy_timeline_chart');
-            var chart = new google.visualization.Timeline(container);
-            var dataTable = new google.visualization.DataTable();
-
-            dataTable.addColumn({ type: 'string', id: 'Country' });
-            dataTable.addColumn({ type: 'string', id: 'Policy' });
-            dataTable.addColumn({ type: 'date', id: 'Start' });
-            dataTable.addColumn({ type: 'date', id: 'End' });
-
-            dataTable.addRows([
-                ['United States', 'National AI Strategy', new Date(2018, 0, 1), new Date(2020, 11, 31)],
-                ['China', 'AI Development Plan', new Date(2017, 6, 1), new Date(2019, 11, 31)],
-                ['France', 'AI for Humanity', new Date(2019, 0, 1), new Date(2021, 11, 31)],
-                ['South Korea', 'Korean AI Policy', new Date(2021, 0, 1), new Date(2023, 11, 31)],
-                ['India', 'National AI Strategy', new Date(2020, 0, 1), new Date(2022, 11, 31)],
-                ['Singapore', 'AI Governance Framework', new Date(2019, 6, 1), new Date(2021, 11, 31)]
+            var data = google.visualization.arrayToDataTable([
+                ['Policy Area', 'Implementation Score'],
+                ['Education Reform', 85],
+                ['Worker Retraining', 60],
+                ['AI Regulation', 45],
+                ['Social Safety Net', 70],
+                ['Infrastructure', 55]
             ]);
 
             var options = {
-                timeline: { 
-                    showRowLabels: true,
-                    colorByRowLabel: true
-                },
-                height: 400,
-                backgroundColor: 'transparent'
+                title: 'Policy Implementation Readiness Score',
+                titleTextStyle: { fontSize: 16, color: '#2c3e50' },
+                hAxis: { title: 'Implementation Score (0-100)', titleTextStyle: { color: '#4a5568' } },
+                vAxis: { title: 'Policy Areas', titleTextStyle: { color: '#4a5568' } },
+                colors: ['#764ba2'],
+                backgroundColor: '#ffffff',
+                legend: { position: 'none' }
             };
 
-            chart.draw(dataTable, options);
+            var chart = new google.visualization.BarChart(document.getElementById('policy-chart'));
+            chart.draw(data, options);
         }
 
         function drawFinancialChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Year', 'Accuracy Improvement (%)', 'Cost Reduction (%)', 'Efficiency Gain (%)'],
-                [1, 10, 5, 8],
-                [2, 15, 12, 18],
-                [3, 20, 18, 25],
-                [4, 25, 22, 30],
-                [5, 30, 28, 35],
-                [6, 35, 32, 40],
-                [7, 40, 35, 45],
-                [8, 45, 38, 48],
-                [9, 50, 40, 52],
-                [10, 55, 42, 55]
+                ['Sector', 'Financial Impact (Billions USD)'],
+                ['Manufacturing', 45],
+                ['Services', 38],
+                ['Agriculture', 12],
+                ['Technology', 65],
+                ['Healthcare', 28]
             ]);
 
             var options = {
-                title: 'AI Financial Tools Impact Over 10 Years',
-                curveType: 'function',
-                legend: { position: 'bottom' },
-                hAxis: { title: 'Years Since Implementation' },
-                vAxis: { title: 'Improvement Percentage (%)' },
-                colors: ['#4caf50', '#ff9800', '#2196f3'],
-                backgroundColor: 'transparent',
-                lineWidth: 3
+                title: 'Economic Impact by Sector',
+                titleTextStyle: { fontSize: 16, color: '#2c3e50' },
+                colors: ['#ff9f43', '#667eea', '#4ecdc4', '#ff6b6b', '#764ba2'],
+                backgroundColor: '#ffffff',
+                legend: { position: 'bottom', textStyle: { color: '#4a5568' } }
             };
 
-            var chart = new google.visualization.LineChart(
-                document.getElementById('financial_accuracy_chart')
-            );
+            var chart = new google.visualization.PieChart(document.getElementById('financial-chart'));
             chart.draw(data, options);
         }
 
-        function showChart(chartType) {
-            // Update active button
-            document.querySelectorAll('.control-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            // Hide all charts
-            document.querySelectorAll('.chart-section').forEach(section => {
-                section.style.display = 'none';
-            });
-
-            // Show selected chart
-            const chartMap = {
-                'displacement': 'displacement_chart',
-                'gdp': 'gdp_projection_chart',
-                'policy': 'policy_timeline_chart',
-                'financial': 'financial_accuracy_chart'
-            };
-
-            const targetChart = chartMap[chartType];
-            if (targetChart) {
-                document.getElementById(targetChart).closest('.chart-section').style.display = 'block';
-                
-                // Redraw the chart to ensure proper rendering
-                setTimeout(() => {
-                    switch(chartType) {
-                        case 'displacement':
-                            drawDisplacementChart();
-                            break;
-                        case 'gdp':
-                            drawGDPChart();
-                            break;
-                        case 'policy':
-                            drawPolicyChart();
-                            break;
-                        case 'financial':
-                            drawFinancialChart();
-                            break;
-                    }
-                }, 100);
-            }
-        }
-
-        // Real-time data simulation
-        let isLiveMode = false;
-        let dataUpdateInterval;
-
-        function startLiveMode() {
-            isLiveMode = true;
-            document.getElementById('liveBtn').textContent = '🔴 Live Data (ON)';
-            document.getElementById('liveBtn').style.background = '#ff4444';
-            
-            dataUpdateInterval = setInterval(() => {
-                updateChartsWithRandomData();
-            }, 3000);
-        }
-
-        function stopLiveMode() {
-            isLiveMode = false;
-            document.getElementById('liveBtn').textContent = '📊 Enable Live Data';
-            document.getElementById('liveBtn').style.background = '';
-            
-            clearInterval(dataUpdateInterval);
-            drawAllCharts(); // Reset to original data
-        }
-
-        function updateChartsWithRandomData() {
-            // Add realistic fluctuations to the data
-            const displacement1 = 70 + (Math.random() - 0.5) * 10;
-            const displacement2 = 20 + (Math.random() - 0.5) * 8;
-            
-            // Update displacement chart with live data
-            var data = google.visualization.arrayToDataTable([
-                ['Location', 'Displacement Risk (%)', 'Protection Level (%)'],
-                ['Urban Areas', Math.round(displacement1), Math.round(100 - displacement1)],
-                ['Rural Areas', Math.round(displacement2), Math.round(100 - displacement2)],
-                ['Semi-Urban', Math.round(45 + (Math.random() - 0.5) * 10), Math.round(55 + (Math.random() - 0.5) * 10)],
-                ['Remote Areas', Math.round(15 + (Math.random() - 0.5) * 5), Math.round(85 + (Math.random() - 0.5) * 5)]
-            ]);
-
-            var options = {
-                title: 'Job Displacement Risk vs Protection Level by Location Type (Live Data)',
-                chartArea: { width: '70%', height: '70%' },
-                colors: ['#ff6b6b', '#4ecdc4'],
-                hAxis: { title: 'Percentage (%)' },
-                vAxis: { title: 'Location Type' },
-                legend: { position: 'top' },
-                backgroundColor: 'transparent',
-                animation: {
-                    duration: 1000,
-                    easing: 'out'
-                }
-            };
-
-            var chart = new google.visualization.BarChart(
-                document.getElementById('displacement_chart')
-            );
-            chart.draw(data, options);
-            
-            // Update insights with live data
-            updateInsights(displacement1, displacement2);
-        }
-
-        function updateInsights(urban, rural) {
-            document.querySelector('.insight-card:nth-child(1) .insight-value').textContent = Math.round(urban) + '%';
-            document.querySelector('.insight-card:nth-child(2) .insight-value').textContent = Math.round(rural) + '%';
-            
-            // Add visual feedback for changes
-            document.querySelectorAll('.insight-value').forEach(element => {
-                element.style.transform = 'scale(1.1)';
-                element.style.color = '#ff6b6b';
-                setTimeout(() => {
-                    element.style.transform = 'scale(1)';
-                    element.style.color = '#667eea';
-                }, 500);
-            });
-        }
-
-        function toggleLiveMode() {
-            if (isLiveMode) {
-                stopLiveMode();
-            } else {
-                startLiveMode();
-            }
-        }
-
-        function filterByRegion(region) {
-            // Update charts based on selected region
-            const regionData = {
-                'southeast-asia': {
-                    displacement: [65, 25, 40, 18],
-                    gdp: [[2025, 12], [2030, 18], [2035, 24], [2040, 30], [2045, 36]]
-                },
-                'south-asia': {
-                    displacement: [75, 15, 50, 12],
-                    gdp: [[2025, 8], [2030, 14], [2035, 20], [2040, 26], [2045, 32]]
-                },
-                'east-africa': {
-                    displacement: [60, 30, 35, 25],
-                    gdp: [[2025, 6], [2030, 12], [2035, 18], [2040, 24], [2045, 30]]
-                }
-            };
-            
-            if (regionData[region]) {
-                const data = regionData[region];
-                updateChartsWithRegionData(data);
-            }
-        }
-
-        function updateChartsWithRegionData(data) {
-            // Update displacement chart with region-specific data
-            var chartData = google.visualization.arrayToDataTable([
-                ['Location', 'Displacement Risk (%)', 'Protection Level (%)'],
-                ['Urban Areas', data.displacement[0], 100 - data.displacement[0]],
-                ['Rural Areas', data.displacement[1], 100 - data.displacement[1]],
-                ['Semi-Urban', data.displacement[2], 100 - data.displacement[2]],
-                ['Remote Areas', data.displacement[3], 100 - data.displacement[3]]
-            ]);
-
-            var options = {
-                title: 'Regional Job Displacement Analysis',
-                chartArea: { width: '70%', height: '70%' },
-                colors: ['#ff6b6b', '#4ecdc4'],
-                hAxis: { title: 'Percentage (%)' },
-                vAxis: { title: 'Location Type' },
-                legend: { position: 'top' },
-                backgroundColor: 'transparent',
-                animation: {
-                    duration: 1000,
-                    easing: 'out'
-                }
-            };
-
-            var chart = new google.visualization.BarChart(
-                document.getElementById('displacement_chart')
-            );
-            chart.draw(chartData, options);
-        }
-
-        function exportData(format) {
-            const data = {
-                displacement_risk: {
-                    urban: 70,
-                    rural: 20,
-                    semi_urban: 45,
-                    remote: 15
-                },
-                gdp_projections: {
-                    2025: 10,
-                    2030: 16,
-                    2035: 22,
-                    2040: 28,
-                    2045: 34
-                },
-                financial_improvement: [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
-            };
-            
-            if (format === 'json') {
-                const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
-                downloadFile(blob, 'ai-economics-data.json');
-            } else if (format === 'csv') {
-                let csv = 'Category,Value\n';
-                csv += `Urban Displacement,${data.displacement_risk.urban}%\n`;
-                csv += `Rural Displacement,${data.displacement_risk.rural}%\n`;
-                Object.entries(data.gdp_projections).forEach(([year, value]) => {
-                    csv += `GDP ${year},${value}%\n`;
-                });
-                
-                const blob = new Blob([csv], {type: 'text/csv'});
-                downloadFile(blob, 'ai-economics-data.csv');
-            }
-        }
-
-        function downloadFile(blob, filename) {
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        }
-
-        function shareAnalysis() {
-            const shareData = {
-                title: 'AI Economics Data Analysis',
-                text: 'Check out this interactive analysis of AI\'s impact on job markets in emerging economies',
-                url: window.location.href
-            };
-            
-            if (navigator.share) {
-                navigator.share(shareData);
-            } else {
-                // Fallback: copy to clipboard
-                navigator.clipboard.writeText(window.location.href).then(() => {
-                    alert('Link copied to clipboard!');
-                });
-            }
-        }
-
-        function generateReport() {
-            // Generate a comprehensive HTML report
-            const reportHTML = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>AI Economics Analysis Report</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; margin: 40px; }
-                        .header { text-align: center; margin-bottom: 30px; }
-                        .section { margin: 20px 0; }
-                        .metric { background: #f5f5f5; padding: 15px; margin: 10px 0; }
-                    </style>
-                </head>
-                <body>
-                    <div class="header">
-                        <h1>AI Economics Analysis Report</h1>
-                        <p>Generated on ${new Date().toLocaleDateString()}</p>
-                    </div>
-                    <div class="section">
-                        <h2>Key Findings</h2>
-                        <div class="metric">Urban Displacement Risk: 70%</div>
-                        <div class="metric">Rural Protection Level: 80%</div>
-                        <div class="metric">GDP Growth Potential: 16% by 2030</div>
-                        <div class="metric">Financial Accuracy Improvement: 55% over 10 years</div>
-                    </div>
-                    <div class="section">
-                        <h2>Regional Analysis</h2>
-                        <p>Southeast Asia shows highest automation adoption rates...</p>
-                        <p>South Asia demonstrates significant growth potential...</p>
-                        <p>East Africa requires targeted policy intervention...</p>
-                    </div>
-                </body>
-                </html>
-            `;
-            
-            const blob = new Blob([reportHTML], {type: 'text/html'});
-            downloadFile(blob, 'ai-economics-report.html');
-        }
-
-        // Initialize with displacement chart visible
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(() => {
-                showChart('displacement');
-            }, 1000);
+        // Make charts responsive
+        window.addEventListener('resize', function() {
+            drawAllCharts();
         });
     </script>
 </body>
