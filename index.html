@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; object-src 'none';">
     <title>Mayo Martinez - Research & Development Portfolio</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js"></script>
@@ -42,6 +43,7 @@
         /* Header & Navigation */
         header {
             background: rgba(255, 255, 255, 0.95);
+            -webkit-backdrop-filter: blur(20px);
             backdrop-filter: blur(20px);
             position: fixed;
             top: 0;
@@ -562,6 +564,7 @@
             padding: 1rem 1.5rem;
             border-radius: 25px;
             background: rgba(255,255,255,0.1);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
         }
@@ -724,6 +727,7 @@
                 rgba(0, 255, 150, 0.2) 0%, 
                 rgba(150, 0, 255, 0.2) 100%);
             border: 1px solid rgba(0, 255, 150, 0.3);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             box-shadow: 
                 0 0 20px rgba(0, 255, 150, 0.2),
@@ -740,6 +744,7 @@
         .btn-secondary {
             border: 2px solid rgba(0, 255, 150, 0.6);
             background: rgba(0, 0, 0, 0.3);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             box-shadow: 
                 0 0 20px rgba(0, 255, 150, 0.1),
@@ -774,6 +779,7 @@
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
@@ -1149,11 +1155,11 @@
                     console.log(`✅ Alien ${effectType} effect working!`);
                     isInitializing = false;
                     
-                    // Auto-cycle effects every 30 seconds
+                    // Auto-cycle effects every 90 seconds
                     setTimeout(() => {
                         currentEffectIndex = (currentEffectIndex + 1) % alienEffects.length;
                         initVanta();
-                    }, 30000);
+                    }, 90000);
                     
                     return;
                 } else {
